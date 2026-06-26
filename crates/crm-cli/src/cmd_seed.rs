@@ -67,26 +67,26 @@ pub fn run(db_path: &str) -> Result<(), String> {
     insert("companies", 1, vec![
         ("name", Value::Str("AkurAI".into())),
         ("domainName", Value::Str("akurai.is".into())),
-        ("annualRevenue", Value::Int(500_000_00)),
+        ("annualRevenue", Value::Int(50_000_000)),
         ("employeeCount", Value::Int(25)),
         ("websiteUrl", Value::Str("https://akurai.is".into())),
     ])?;
     insert("companies", 2, vec![
         ("name", Value::Str("Acme Corp".into())),
         ("domainName", Value::Str("acme.is".into())),
-        ("annualRevenue", Value::Int(12_000_000_00)),
+        ("annualRevenue", Value::Int(1_200_000_000)),
         ("employeeCount", Value::Int(150)),
     ])?;
     insert("companies", 3, vec![
         ("name", Value::Str("Nordic Technologies".into())),
         ("domainName", Value::Str("nordic.is".into())),
-        ("annualRevenue", Value::Int(8_500_000_00)),
+        ("annualRevenue", Value::Int(850_000_000)),
         ("employeeCount", Value::Int(75)),
     ])?;
     insert("companies", 4, vec![
         ("name", Value::Str("Startup Iceland".into())),
         ("domainName", Value::Str("startup.is".into())),
-        ("annualRevenue", Value::Int(500_000_00)),
+        ("annualRevenue", Value::Int(50_000_000)),
         ("employeeCount", Value::Int(5)),
     ])?;
 
@@ -95,7 +95,7 @@ pub fn run(db_path: &str) -> Result<(), String> {
     // Opportunities
     insert("opportunities", 1, vec![
         ("name", Value::Str("AkurAI Platform Deal".into())),
-        ("amount", Value::Int(250_000_00)),
+        ("amount", Value::Int(25_000_000)),
         ("stage", Value::Str("negotiation".into())),
         ("probability", Value::Int(70)),
         ("personId", Value::Int(1)),
@@ -103,7 +103,7 @@ pub fn run(db_path: &str) -> Result<(), String> {
     ])?;
     insert("opportunities", 2, vec![
         ("name", Value::Str("Acme Enterprise License".into())),
-        ("amount", Value::Int(500_000_00)),
+        ("amount", Value::Int(50_000_000)),
         ("stage", Value::Str("proposal".into())),
         ("probability", Value::Int(50)),
         ("personId", Value::Int(2)),
@@ -111,7 +111,7 @@ pub fn run(db_path: &str) -> Result<(), String> {
     ])?;
     insert("opportunities", 3, vec![
         ("name", Value::Str("Nordic Consulting".into())),
-        ("amount", Value::Int(85_000_00)),
+        ("amount", Value::Int(8_500_000)),
         ("stage", Value::Str("meeting".into())),
         ("probability", Value::Int(30)),
         ("personId", Value::Int(5)),
@@ -119,7 +119,7 @@ pub fn run(db_path: &str) -> Result<(), String> {
     ])?;
     insert("opportunities", 4, vec![
         ("name", Value::Str("Startup Iceland Partnership".into())),
-        ("amount", Value::Int(25_000_00)),
+        ("amount", Value::Int(2_500_000)),
         ("stage", Value::Str("new".into())),
         ("probability", Value::Int(10)),
         ("personId", Value::Int(4)),
@@ -127,7 +127,7 @@ pub fn run(db_path: &str) -> Result<(), String> {
     ])?;
     insert("opportunities", 5, vec![
         ("name", Value::Str("Lost Deal - Legacy Migrate".into())),
-        ("amount", Value::Int(100_000_00)),
+        ("amount", Value::Int(10_000_000)),
         ("stage", Value::Str("lost".into())),
         ("probability", Value::Int(0)),
     ])?;

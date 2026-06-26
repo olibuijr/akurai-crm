@@ -291,11 +291,6 @@
 
   <div class="toast-container" id="toast-container"></div>
   <script type="module" src="app.js"></script>
-  <script type="module">
-    import { loadDashboardStats } from './app.js';
-    if (document.getElementById('stat-contacts')) {
-      loadDashboardStats();
-    }
-  </script>
+  <script type="module" src="databinder.js"></script>
 </body>
 </html>

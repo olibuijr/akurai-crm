@@ -66,66 +66,7 @@
       </header>
 
       <div class="main-content">
-        <div class="notes-grid">
-          <div class="note-card">
-            <div class="note-date">Jun 24, 2026</div>
-            <div class="note-title">Product fit discussion — NordicTech</div>
-            <div class="note-preview">Jóna is very interested in the platform analytics module. She mentioned their current solution lacks real-time reporting. Suggested a custom demo for their specific use case around supply chain visualization...</div>
-            <div class="note-tags">
-              <span class="badge badge-indigo">NordicTech</span>
-              <span class="badge badge-blue">Meeting Notes</span>
-            </div>
-          </div>
-
-          <div class="note-card">
-            <div class="note-date">Jun 22, 2026</div>
-            <div class="note-title">DataFlow Inc — Requirements gathering</div>
-            <div class="note-preview">Guðrún outlined their key requirements: multi-tenant architecture, SSO integration, custom reporting dashboard, and API access for their existing toolchain. They want to move quickly — aiming for a Q3 rollout...</div>
-            <div class="note-tags">
-              <span class="badge badge-green">DataFlow</span>
-              <span class="badge badge-blue">Requirements</span>
-            </div>
-          </div>
-
-          <div class="note-card">
-            <div class="note-date">Jun 20, 2026</div>
-            <div class="note-title">Initial contact — TechNordic conference</div>
-            <div class="note-preview">Met Jóna and Katrín from NordicTech at the TechNordic conference. They're a 45-person SaaS company based in Reykjavík. Currently evaluating new platform solutions to replace legacy infrastructure. Good chemistry — follow up next week...</div>
-            <div class="note-tags">
-              <span class="badge badge-indigo">NordicTech</span>
-              <span class="badge badge-slate">Event</span>
-            </div>
-          </div>
-
-          <div class="note-card">
-            <div class="note-date">Jun 18, 2026</div>
-            <div class="note-title">Arktis AI — Partnership discussion</div>
-            <div class="note-preview">Sigurður is interested in a strategic partnership. Arktis AI has 28 employees and serves the Nordic region. They see our platform as complementary to their ML offerings. Discussed potential co-selling arrangement...</div>
-            <div class="note-tags">
-              <span class="badge badge-slate">Arktis AI</span>
-              <span class="badge badge-amber">Partnership</span>
-            </div>
-          </div>
-
-          <div class="note-card">
-            <div class="note-date">Jun 15, 2026</div>
-            <div class="note-title">Pipeline review — Q2 retrospective</div>
-            <div class="note-preview">Q2 closed at $187K in won deals, 68% win rate. Top performer was the DataFlow Q2 Infrastructure Upgrade ($32K). Key learnings: early technical demos improve close rates by 40%. Need to prioritize discovery calls earlier in the cycle...</div>
-            <div class="note-tags">
-              <span class="badge badge-red">Internal</span>
-              <span class="badge badge-blue">Quarterly Review</span>
-            </div>
-          </div>
-
-          <div class="note-card">
-            <div class="note-date">Jun 10, 2026</div>
-            <div class="note-title">Vortex Solutions — Discovery call</div>
-            <div class="note-preview">Ólafur from Vortex reached out about cloud migration support. They have 75 employees and are looking to move from on-prem to cloud. Initial estimate $28K. Need to schedule a technical deep-dive with their engineering team...</div>
-            <div class="note-tags">
-              <span class="badge badge-blue">Vortex</span>
-              <span class="badge badge-green">Discovery</span>
-            </div>
-          </div>
+        <div class="notes-grid" id="notes-grid">
         </div>
 
         <div style="text-align:center;padding:var(--space-8);">
@@ -137,5 +78,9 @@
 
   <div class="toast-container" id="toast-container"></div>
   <script type="module" src="app.js"></script>
+  <script type="module">
+    import { loadNotes } from './databinder.js';
+    loadNotes();
+  </script>
 </body>
 </html>

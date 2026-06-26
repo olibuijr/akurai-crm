@@ -73,9 +73,9 @@
         <div class="detail-header" style="border:1px solid var(--color-border);border-radius:var(--radius-lg);background:var(--color-surface);margin-bottom:var(--space-6);padding:var(--space-8);">
           <div class="detail-avatar" style="width:72px;height:72px;font-size:var(--text-2xl);background:var(--color-primary-light);color:var(--color-primary);">$</div>
           <div class="detail-info">
-            <h1>NordicTech Platform Deal</h1>
+            <h1 id="detail-deal-name">NordicTech Platform Deal</h1>
             <div class="detail-subtitle">
-              <span class="badge badge-indigo" style="font-size:var(--text-sm);padding:4px 12px;">Meeting</span>
+              <span class="badge badge-indigo" id="detail-deal-stage" style="font-size:var(--text-sm);padding:4px 12px;">Meeting</span>
               <span style="margin:0 var(--space-2);color:var(--color-text-tertiary);">·</span>
               Closes Jul 30, 2026
             </div>
@@ -139,11 +139,11 @@
             <div style="display:grid;grid-template-columns:1fr;gap:var(--space-4);">
               <div class="info-field">
                 <div class="info-label">Amount</div>
-                <div class="info-value" style="font-size:var(--text-xl);font-weight:var(--weight-bold);color:var(--color-primary);">$45,000</div>
+                <div class="info-value" id="detail-deal-amount" style="font-size:var(--text-xl);font-weight:var(--weight-bold);color:var(--color-primary);">$45,000</div>
               </div>
               <div class="info-field">
                 <div class="info-label">Probability</div>
-                <div class="info-value">60%</div>
+                <div class="info-value" id="detail-deal-probability">60%</div>
               </div>
               <div class="info-field">
                 <div class="info-label">Expected Value</div>
@@ -151,11 +151,11 @@
               </div>
               <div class="info-field">
                 <div class="info-label">Contact</div>
-                <div class="info-value"><a href="/person-detail.html">Jóna Jónsdóttir</a></div>
+                <div class="info-value" id="detail-deal-person"><a href="/person-detail.html">Jóna Jónsdóttir</a></div>
               </div>
               <div class="info-field">
                 <div class="info-label">Company</div>
-                <div class="info-value"><a href="/company-detail.html">NordicTech</a></div>
+                <div class="info-value" id="detail-deal-company"><a href="/company-detail.html">NordicTech</a></div>
               </div>
               <div class="info-field">
                 <div class="info-label">Close Date</div>
@@ -245,5 +245,10 @@
 
   <div class="toast-container" id="toast-container"></div>
   <script type="module" src="app.js"></script>
+  <script type="module">
+    import { loadOpportunityDetail } from './databinder.js';
+    const id = new URLSearchParams(window.location.search).get('id');
+    if (id) loadOpportunityDetail(parseInt(id));
+  </script>
 </body>
 </html>

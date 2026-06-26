@@ -15,11 +15,12 @@ pub struct TimelineActivity {
 impl TimelineActivity {
     pub fn to_json(&self) -> akurai_json::Value {
         use akurai_json::Value;
-        let mut fields = Vec::new();
-        fields.push(("id".into(), Value::Int(self.id as i64)));
-        fields.push(("entityType".into(), Value::Str(self.entity_type.singular().into())));
-        fields.push(("entityId".into(), Value::Int(self.entity_id as i64)));
-        fields.push(("action".into(), Value::Str(self.action.clone())));
+        let mut fields = vec![
+            ("id".into(), Value::Int(self.id as i64)),
+            ("entityType".into(), Value::Str(self.entity_type.singular().into())),
+            ("entityId".into(), Value::Int(self.entity_id as i64)),
+            ("action".into(), Value::Str(self.action.clone())),
+        ];
         if let Some(ref d) = self.details {
             fields.push(("details".into(), Value::Str(d.clone())));
         }

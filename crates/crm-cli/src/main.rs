@@ -1,3 +1,5 @@
+#![forbid(unsafe_code)]
+
 mod cmd_seed;
 mod cmd_serve;
 

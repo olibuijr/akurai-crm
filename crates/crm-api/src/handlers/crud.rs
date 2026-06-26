@@ -1,3 +1,4 @@
+use crate::handlers::timeline::record_timeline;
 use crate::router_setup::{bad_request, internal_error, json_response, not_found, upper_bound, CrmState};
 use akurai_http::{Request, Response};
 use akurai_json::Value;
@@ -108,12 +109,12 @@ pub fn create_route(state: Arc<Mutex<CrmState>>, entity: &'static str) -> Box<dy
 
         match db.insert(&key, json_str.as_bytes()) {
             Ok(_) => {
+                let _ = record_timeline(&mut db, coll_name, next_id, "created", None);
                 let body = record.to_json();
-                let resp = Response::new(201)
+                Response::new(201)
                     .with_header("Content-Type", "application/json")
                     .with_header("Access-Control-Allow-Origin", "*")
-                    .with_body("application/json", body.into_bytes());
-                resp
+                    .with_body("application/json", body.into_bytes())
             }
             Err(e) => internal_error(&format!("storage: {e}")),
         }
@@ -187,7 +188,10 @@ pub fn update_route(state: Arc<Mutex<CrmState>>, entity: &'static str) -> Box<dy
         let json_str = record.to_json();
 
         match db.insert(&key, json_str.as_bytes()) {
-            Ok(_) => json_response(record),
+            Ok(_) => {
+                let _ = record_timeline(&mut db, coll_name, id, "updated", None);
+                json_response(record)
+            }
             Err(e) => internal_error(&format!("storage: {e}")),
         }
     })
@@ -205,10 +209,13 @@ pub fn delete_route(state: Arc<Mutex<CrmState>>, entity: &'static str) -> Box<dy
 
         let key = format!("{}:{}", coll_name, id).into_bytes();
         match db.delete(&key) {
-            Ok(true) => json_response(Value::Object(vec![
-                ("deleted".into(), Value::Bool(true)),
-                ("id".into(), Value::Int(id as i64)),
-            ])),
+            Ok(true) => {
+                let _ = record_timeline(&mut db, coll_name, id, "deleted", None);
+                json_response(Value::Object(vec![
+                    ("deleted".into(), Value::Bool(true)),
+                    ("id".into(), Value::Int(id as i64)),
+                ]))
+            }
             Ok(false) => not_found(&format!("{entity}/{id}")),
             Err(e) => internal_error(&format!("storage: {e}")),
         }

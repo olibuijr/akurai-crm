@@ -72,10 +72,10 @@
       <div class="main-content">
         <!-- Detail Header -->
         <div class="detail-header" style="border:1px solid var(--color-border);border-radius:var(--radius-lg);background:var(--color-surface);margin-bottom:var(--space-6);padding:var(--space-8);">
-          <div class="detail-avatar" style="width:72px;height:72px;font-size:var(--text-2xl);">JJ</div>
+          <div class="detail-avatar" id="detail-avatar" style="width:72px;height:72px;font-size:var(--text-2xl);">JJ</div>
           <div class="detail-info">
-            <h1>Jóna Jónsdóttir</h1>
-            <div class="detail-subtitle">CEO at <a href="/company-detail.html">NordicTech</a></div>
+            <h1 id="detail-name">Jóna Jónsdóttir</h1>
+            <div class="detail-subtitle"><span id="detail-jobtitle">CEO</span> at <span id="detail-company">NordicTech</span></div>
             <div style="margin-top:var(--space-3);display:flex;gap:var(--space-1);flex-wrap:wrap;">
               <span class="badge badge-indigo">Key Contact</span>
               <span class="badge badge-blue">Decision Maker</span>
@@ -117,11 +117,11 @@
               <div style="display:grid;grid-template-columns:1fr;gap:var(--space-4);">
                 <div class="info-field">
                   <div class="info-label">Email</div>
-                  <div class="info-value"><a href="mailto:jona@nordictech.is">jona@nordictech.is</a></div>
+                  <div class="info-value" id="detail-email"><a href="mailto:jona@nordictech.is">jona@nordictech.is</a></div>
                 </div>
                 <div class="info-field">
                   <div class="info-label">Phone</div>
-                  <div class="info-value"><a href="tel:+3541234567">+354 123 4567</a></div>
+                  <div class="info-value" id="detail-phone"><a href="tel:+3541234567">+354 123 4567</a></div>
                 </div>
                 <div class="info-field">
                   <div class="info-label">LinkedIn</div>
@@ -280,6 +280,11 @@
 
   <div class="toast-container" id="toast-container"></div>
   <script type="module" src="app.js"></script>
+  <script type="module">
+    import { loadPersonDetail } from './databinder.js';
+    const id = new URLSearchParams(window.location.search).get('id');
+    if (id) loadPersonDetail(parseInt(id));
+  </script>
   <script type="module">
     // Tab switching
     document.querySelectorAll('.detail-tab').forEach(tab => {

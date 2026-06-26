@@ -88,68 +88,11 @@
                 <th class="sortable">Name</th>
                 <th>Email</th>
                 <th>Phone</th>
-                <th>Company</th>
                 <th>Job Title</th>
-                <th>Created</th>
+                <th>Company</th>
               </tr>
             </thead>
             <tbody id="people-table-body">
-              <tr>
-                <td><a href="/person-detail.html" class="person-cell"><div class="avatar avatar-sm">JJ</div> Jóna Jónsdóttir</a></td>
-                <td class="cell-muted">jona@nordictech.is</td>
-                <td class="cell-muted">+354 123 4567</td>
-                <td><a href="/company-detail.html">NordicTech</a></td>
-                <td class="cell-muted">CEO</td>
-                <td class="cell-muted">Jun 20, 2026</td>
-              </tr>
-              <tr>
-                <td><a href="/person-detail.html" class="person-cell"><div class="avatar avatar-sm">GP</div> Guðrún Pálsdóttir</a></td>
-                <td class="cell-muted">gudrun@dataflow.com</td>
-                <td class="cell-muted">+354 987 6543</td>
-                <td><a href="/company-detail.html">DataFlow Inc</a></td>
-                <td class="cell-muted">CTO</td>
-                <td class="cell-muted">Jun 18, 2026</td>
-              </tr>
-              <tr>
-                <td><a href="/person-detail.html" class="person-cell"><div class="avatar avatar-sm">SM</div> Sigurður Magnússon</a></td>
-                <td class="cell-muted">siggi@arktis.ai</td>
-                <td class="cell-muted">+354 555 1212</td>
-                <td><a href="/company-detail.html">Arktis AI</a></td>
-                <td class="cell-muted">VP Engineering</td>
-                <td class="cell-muted">Jun 15, 2026</td>
-              </tr>
-              <tr>
-                <td><a href="/person-detail.html" class="person-cell"><div class="avatar avatar-sm">KE</div> Katrín Einarsdóttir</a></td>
-                <td class="cell-muted">katrin@nordictech.is</td>
-                <td class="cell-muted">+354 444 5555</td>
-                <td><a href="/company-detail.html">NordicTech</a></td>
-                <td class="cell-muted">Product Manager</td>
-                <td class="cell-muted">Jun 12, 2026</td>
-              </tr>
-              <tr>
-                <td><a href="/person-detail.html" class="person-cell"><div class="avatar avatar-sm">OO</div> Ólafur Ólafsson</a></td>
-                <td class="cell-muted">olafur@vortex.is</td>
-                <td class="cell-muted">+354 777 8888</td>
-                <td><a href="/company-detail.html">Vortex Solutions</a></td>
-                <td class="cell-muted">Founder</td>
-                <td class="cell-muted">Jun 10, 2026</td>
-              </tr>
-              <tr>
-                <td><a href="/person-detail.html" class="person-cell"><div class="avatar avatar-sm">HK</div> Helga Kristín</a></td>
-                <td class="cell-muted">helga@dataflow.com</td>
-                <td class="cell-muted">+354 333 4444</td>
-                <td><a href="/company-detail.html">DataFlow Inc</a></td>
-                <td class="cell-muted">Head of Sales</td>
-                <td class="cell-muted">Jun 8, 2026</td>
-              </tr>
-              <tr>
-                <td><a href="/person-detail.html" class="person-cell"><div class="avatar avatar-sm">BJ</div> Björn Jóhannesson</a></td>
-                <td class="cell-muted">bjorn@arktis.ai</td>
-                <td class="cell-muted">+354 222 3333</td>
-                <td><a href="/company-detail.html">Arktis AI</a></td>
-                <td class="cell-muted">ML Engineer</td>
-                <td class="cell-muted">Jun 5, 2026</td>
-              </tr>
             </tbody>
           </table>
 
@@ -171,5 +114,12 @@
 
   <div class="toast-container" id="toast-container"></div>
   <script type="module" src="app.js"></script>
+  <script type="module">
+    import { loadTable, renderPeopleTable } from './databinder.js';
+    document.addEventListener('DOMContentLoaded', async () => {
+      const data = await loadTable('people', 'people-table-body');
+      renderPeopleTable(data, 'people-table-body');
+    });
+  </script>
 </body>
 </html>

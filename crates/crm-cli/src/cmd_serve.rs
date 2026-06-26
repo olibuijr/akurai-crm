@@ -13,7 +13,7 @@ pub struct Config {
 
 pub fn run(cfg: Config) -> io::Result<()> {
     let state = CrmState::new(&cfg.db, cfg.dir.clone())
-        .map_err(|e| io::Error::new(io::ErrorKind::Other, e))?;
+        .map_err(io::Error::other)?;
     let state = Arc::new(Mutex::new(state));
 
     let routes = build_router(state);
@@ -40,7 +40,7 @@ fn dispatch(routes: &[Route], req: &Request) -> Response {
         let pattern = akurai_router::Pattern::parse(route.pattern);
         if pattern.match_path(&req.path).is_some() {
             let score = pattern.specificity();
-            if best.as_ref().map_or(true, |(_, b)| score > *b) {
+            if best.as_ref().is_none_or(|(_, b)| score > *b) {
                 let resp = (route.handler)(req);
                 best = Some((resp, score));
             }

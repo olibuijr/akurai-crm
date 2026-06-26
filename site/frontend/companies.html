@@ -88,51 +88,10 @@
                 <th>Domain</th>
                 <th>Revenue</th>
                 <th>Employees</th>
-                <th>Contacts</th>
-                <th>Created</th>
+                <th>Website</th>
               </tr>
             </thead>
             <tbody id="companies-table-body">
-              <tr>
-                <td><a href="/company-detail.html" style="font-weight:var(--weight-medium);">NordicTech</a></td>
-                <td class="cell-muted">nordictech.is</td>
-                <td class="cell-muted">$4.2M</td>
-                <td class="cell-muted">45</td>
-                <td class="cell-muted">2</td>
-                <td class="cell-muted">Jun 20, 2026</td>
-              </tr>
-              <tr>
-                <td><a href="/company-detail.html" style="font-weight:var(--weight-medium);">DataFlow Inc</a></td>
-                <td class="cell-muted">dataflow.com</td>
-                <td class="cell-muted">$12.8M</td>
-                <td class="cell-muted">120</td>
-                <td class="cell-muted">2</td>
-                <td class="cell-muted">Jun 18, 2026</td>
-              </tr>
-              <tr>
-                <td><a href="/company-detail.html" style="font-weight:var(--weight-medium);">Arktis AI</a></td>
-                <td class="cell-muted">arktis.ai</td>
-                <td class="cell-muted">$2.1M</td>
-                <td class="cell-muted">28</td>
-                <td class="cell-muted">2</td>
-                <td class="cell-muted">Jun 15, 2026</td>
-              </tr>
-              <tr>
-                <td><a href="/company-detail.html" style="font-weight:var(--weight-medium);">Vortex Solutions</a></td>
-                <td class="cell-muted">vortex.is</td>
-                <td class="cell-muted">$8.5M</td>
-                <td class="cell-muted">75</td>
-                <td class="cell-muted">1</td>
-                <td class="cell-muted">Jun 10, 2026</td>
-              </tr>
-              <tr>
-                <td><a href="/company-detail.html" style="font-weight:var(--weight-medium);">IceCloud Systems</a></td>
-                <td class="cell-muted">icecloud.is</td>
-                <td class="cell-muted">$1.5M</td>
-                <td class="cell-muted">15</td>
-                <td class="cell-muted">0</td>
-                <td class="cell-muted">Jun 3, 2026</td>
-              </tr>
             </tbody>
           </table>
 
@@ -153,5 +112,12 @@
 
   <div class="toast-container" id="toast-container"></div>
   <script type="module" src="app.js"></script>
+  <script type="module">
+    import { loadTable, renderCompaniesTable } from './databinder.js';
+    document.addEventListener('DOMContentLoaded', async () => {
+      const data = await loadTable('companies', 'companies-table-body');
+      renderCompaniesTable(data, 'companies-table-body');
+    });
+  </script>
 </body>
 </html>

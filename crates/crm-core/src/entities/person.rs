@@ -19,11 +19,12 @@ pub struct Person {
 impl Person {
     pub fn to_json(&self) -> akurai_json::Value {
         use akurai_json::Value;
-        let mut fields = Vec::new();
-        fields.push(("id".into(), Value::Int(self.id as i64)));
-        fields.push(("name".into(), Value::Str(self.name.display())));
-        fields.push(("firstName".into(), Value::Str(self.name.first.clone())));
-        fields.push(("lastName".into(), Value::Str(self.name.last.clone())));
+        let mut fields = vec![
+            ("id".into(), Value::Int(self.id as i64)),
+            ("name".into(), Value::Str(self.name.display())),
+            ("firstName".into(), Value::Str(self.name.first.clone())),
+            ("lastName".into(), Value::Str(self.name.last.clone())),
+        ];
         if let Some(ref e) = self.email {
             fields.push(("email".into(), Value::Str(e.address.clone())));
         }

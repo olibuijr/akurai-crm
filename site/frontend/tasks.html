@@ -75,70 +75,6 @@
           </div>
 
           <div class="task-list" id="task-list">
-            <div class="task-item" data-status="todo">
-              <input type="checkbox" class="task-checkbox">
-              <span class="task-title">Send proposal to NordicTech</span>
-              <div class="task-meta">
-                <span class="task-due">Today</span>
-                <span class="badge badge-blue">NordicTech</span>
-              </div>
-            </div>
-            <div class="task-item" data-status="in-progress">
-              <input type="checkbox" class="task-checkbox">
-              <span class="task-title">Prepare Q3 pipeline forecast</span>
-              <div class="task-meta">
-                <span class="task-due">Tomorrow</span>
-                <span class="badge badge-indigo">Internal</span>
-              </div>
-            </div>
-            <div class="task-item" data-status="todo">
-              <input type="checkbox" class="task-checkbox">
-              <span class="task-title">Follow up with DataFlow Inc</span>
-              <div class="task-meta">
-                <span class="task-due">Jun 28</span>
-                <span class="badge badge-green">DataFlow</span>
-              </div>
-            </div>
-            <div class="task-item" data-status="in-progress">
-              <input type="checkbox" class="task-checkbox">
-              <span class="task-title">Update contract templates</span>
-              <div class="task-meta">
-                <span class="task-due">Jul 2</span>
-                <span class="badge badge-amber">Legal</span>
-              </div>
-            </div>
-            <div class="task-item" data-status="todo">
-              <input type="checkbox" class="task-checkbox">
-              <span class="task-title">Schedule demo for Arktis AI team</span>
-              <div class="task-meta">
-                <span class="task-due">Jul 5</span>
-                <span class="badge badge-slate">Arktis AI</span>
-              </div>
-            </div>
-            <div class="task-item done" data-status="done">
-              <input type="checkbox" class="task-checkbox" checked>
-              <span class="task-title">Initial outreach call with Jóna</span>
-              <div class="task-meta">
-                <span class="task-due">Jun 22</span>
-                <span class="badge badge-green">Done</span>
-              </div>
-            </div>
-            <div class="task-item done" data-status="done">
-              <input type="checkbox" class="task-checkbox" checked>
-              <span class="task-title">Review Q2 performance metrics</span>
-              <div class="task-meta">
-                <span class="task-due">Jun 20</span>
-                <span class="badge badge-green">Done</span>
-              </div>
-            </div>
-            <div class="task-item done" data-status="done">
-              <input type="checkbox" class="task-checkbox" checked>
-              <span class="task-title">Update CRM documentation</span>
-              <div class="task-meta">
-                <span class="task-due">Jun 18</span>
-                <span class="badge badge-green">Done</span>
-              </div>
-            </div>
           </div>
 
           <div class="pagination">
@@ -167,6 +103,13 @@
           }
         });
       });
+    });
+  </script>
+  <script type="module">
+    import { loadTable, renderTasksList } from './databinder.js';
+    document.addEventListener('DOMContentLoaded', async () => {
+      const data = await loadTable('tasks', 'task-list');
+      renderTasksList(data, 'task-list');
     });
   </script>
 </body>

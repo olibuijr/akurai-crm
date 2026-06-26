@@ -73,8 +73,8 @@
         <div class="detail-header" style="border:1px solid var(--color-border);border-radius:var(--radius-lg);background:var(--color-surface);margin-bottom:var(--space-6);padding:var(--space-8);">
           <div class="detail-avatar" style="width:72px;height:72px;font-size:var(--text-2xl);background:var(--color-info-light);color:var(--color-info);">N</div>
           <div class="detail-info">
-            <h1>NordicTech</h1>
-            <div class="detail-subtitle">nordictech.is · <a href="https://nordictech.is" target="_blank">Visit website</a></div>
+            <h1 id="detail-company-name">NordicTech</h1>
+            <div class="detail-subtitle"><span id="detail-domain">nordictech.is</span> · <a id="detail-website" href="https://nordictech.is" target="_blank">Visit website</a></div>
             <div style="margin-top:var(--space-3);display:flex;gap:var(--space-1);flex-wrap:wrap;">
               <span class="badge badge-blue">SaaS</span>
               <span class="badge badge-indigo">Customer</span>
@@ -111,15 +111,15 @@
               <div style="display:grid;grid-template-columns:1fr;gap:var(--space-4);">
                 <div class="info-field">
                   <div class="info-label">Domain</div>
-                  <div class="info-value">nordictech.is</div>
+                  <div class="info-value" id="detail-domain-info">nordictech.is</div>
                 </div>
                 <div class="info-field">
                   <div class="info-label">Annual Revenue</div>
-                  <div class="info-value">$4.2M</div>
+                  <div class="info-value" id="detail-revenue">$4.2M</div>
                 </div>
                 <div class="info-field">
                   <div class="info-label">Employees</div>
-                  <div class="info-value">45</div>
+                  <div class="info-value" id="detail-employees">45</div>
                 </div>
                 <div class="info-field">
                   <div class="info-label">Address</div>
@@ -151,27 +151,18 @@
         <div class="detail-body tab-content" id="tab-people-tab" style="display:none;">
           <div class="info-card">
             <h3>People at NordicTech</h3>
-            <div style="display:flex;flex-direction:column;">
-              <div style="display:flex;align-items:center;justify-content:space-between;padding:var(--space-3) 0;border-bottom:1px solid var(--color-border-light);">
-                <div style="display:flex;align-items:center;gap:var(--space-3);">
-                  <div class="avatar avatar-sm">JJ</div>
-                  <div>
-                    <div style="font-size:var(--text-sm);font-weight:var(--weight-medium);"><a href="/person-detail.html">Jóna Jónsdóttir</a></div>
-                    <div style="font-size:var(--text-xs);color:var(--color-text-secondary);">CEO</div>
-                  </div>
-                </div>
-                <span class="badge badge-indigo">Decision Maker</span>
-              </div>
-              <div style="display:flex;align-items:center;justify-content:space-between;padding:var(--space-3) 0;">
-                <div style="display:flex;align-items:center;gap:var(--space-3);">
-                  <div class="avatar avatar-sm">KE</div>
-                  <div>
-                    <div style="font-size:var(--text-sm);font-weight:var(--weight-medium);"><a href="/person-detail.html">Katrín Einarsdóttir</a></div>
-                    <div style="font-size:var(--text-xs);color:var(--color-text-secondary);">Product Manager</div>
-                  </div>
-                </div>
-                <span class="badge badge-blue">Champion</span>
-              </div>
+            <div class="table-container">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Job Title</th>
+                  </tr>
+                </thead>
+                <tbody id="company-people-tbody">
+                </tbody>
+              </table>
             </div>
           </div>
         </div>
@@ -240,6 +231,11 @@
 
   <div class="toast-container" id="toast-container"></div>
   <script type="module" src="app.js"></script>
+  <script type="module">
+    import { loadCompanyDetail } from './databinder.js';
+    const id = new URLSearchParams(window.location.search).get('id');
+    if (id) loadCompanyDetail(parseInt(id));
+  </script>
   <script type="module">
     document.querySelectorAll('.detail-tab').forEach(tab => {
       tab.addEventListener('click', () => {

@@ -17,7 +17,7 @@ pub fn static_file_route(state: Arc<Mutex<CrmState>>) -> Box<dyn Fn(&Request) ->
 
         let canonical = std::fs::canonicalize(&file_path).ok();
         let frontend_canonical = std::fs::canonicalize(frontend).unwrap_or_default();
-        let is_safe = canonical.as_ref().map_or(false, |c| c.starts_with(&frontend_canonical));
+        let is_safe = canonical.as_ref().is_some_and(|c| c.starts_with(&frontend_canonical));
 
         if !is_safe {
             return not_found("invalid path");
