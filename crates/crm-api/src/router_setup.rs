@@ -1,3 +1,4 @@
+use crate::auth;
 use crate::handlers;
 use akurai_http::{Request, Response};
 use akurai_storage::BTree;
@@ -56,6 +57,27 @@ pub fn build_router(state: Arc<Mutex<CrmState>>) -> Vec<Route> {
     vec![
         r("OPTIONS", "/*", options_handler()),
         r("GET", "/", handlers::static_file_route(Arc::clone(&state))),
+        // Auth routes (before catch-all /*)
+        r(
+            "GET",
+            "/auth/login",
+            auth::login_route(Arc::clone(&state)),
+        ),
+        r(
+            "GET",
+            "/auth/callback",
+            auth::callback_route(Arc::clone(&state)),
+        ),
+        r(
+            "GET",
+            "/auth/logout",
+            auth::logout_route(Arc::clone(&state)),
+        ),
+        r(
+            "GET",
+            "/api/me",
+            auth::me_route(Arc::clone(&state)),
+        ),
         r("GET", "/*", handlers::static_file_route(Arc::clone(&state))),
         r(
             "GET",

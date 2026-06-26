@@ -20,62 +20,34 @@
 
       <div class="login-error" id="login-error"></div>
 
-      <form id="login-form" onsubmit="return false;">
-        <div class="form-group">
-          <label class="form-label" for="email">Email address</label>
-          <input class="form-input" type="email" id="email" placeholder="you@company.com" required autocomplete="email">
-        </div>
-        <div class="form-group">
-          <label class="form-label" for="password">Password</label>
-          <input class="form-input" type="password" id="password" placeholder="Enter your password" required autocomplete="current-password">
-        </div>
-        <button class="btn btn-primary btn-lg" type="submit" style="width:100%;justify-content:center;margin-top:var(--space-2);" id="signin-btn">
-          Sign in
-        </button>
-      </form>
+      <button class="btn btn-primary btn-lg" type="button" style="width:100%;justify-content:center;" id="signin-btn">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:18px;height:18px;margin-right:8px;"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/><polyline points="10 17 15 12 10 7"/><line x1="15" y1="12" x2="3" y2="12"/></svg>
+        Sign in with AkurAI
+      </button>
 
       <div class="login-footer">
-        Don't have an account? <a href="#">Sign up</a>
+        <a href="https://auth.olibuijr.com">Manage your account</a>
       </div>
     </div>
   </div>
 
-  <div class="toast-container" id="toast-container"></div>
-
   <script type="module">
-    import { showToast } from './app.js';
-
-    document.getElementById('login-form').addEventListener('submit', async (e) => {
-      e.preventDefault();
-      const btn = document.getElementById('signin-btn');
-      const email = document.getElementById('email').value;
-      const password = document.getElementById('password').value;
-      const errorEl = document.getElementById('login-error');
-
-      btn.disabled = true;
-      btn.textContent = 'Signing in...';
-
-      errorEl.style.display = 'none';
-
-      try {
-        const res = await fetch('/api/auth/login', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ email, password }),
-        });
-        if (!res.ok) {
-          const data = await res.json().catch(() => ({}));
-          throw new Error(data.message || 'Invalid email or password');
-        }
-        window.location.href = '/dashboard.html';
-      } catch (err) {
-        errorEl.textContent = err.message;
-        errorEl.style.display = 'block';
-        showToast(err.message, 'error');
-        btn.disabled = false;
-        btn.textContent = 'Sign in';
-      }
+    document.getElementById('signin-btn').addEventListener('click', () => {
+      window.location.href = '/auth/login';
     });
+
+    // Show error if redirected back with auth_error
+    const params = new URLSearchParams(window.location.search);
+    if (params.get('auth_error') === '1') {
+      const el = document.getElementById('login-error');
+      el.textContent = 'Authentication failed. Please try again.';
+      el.style.display = 'block';
+    }
+    if (params.get('session_expired') === '1') {
+      const el = document.getElementById('login-error');
+      el.textContent = 'Your session has expired. Please sign in again.';
+      el.style.display = 'block';
+    }
   </script>
 </body>
 </html>

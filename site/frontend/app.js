@@ -1,7 +1,24 @@
 // app.js — AkurAI-CRM Application Shell
 import { client } from './crm.js';
 
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', async () => {
+  // Check session on app pages (not index.html)
+  if (window.location.pathname !== '/' && !window.location.pathname.endsWith('index.html')) {
+    try {
+      const info = await client.me();
+      if (!info.authenticated) {
+        window.location.href = '/?session_expired=1';
+        return;
+      }
+      // Update the sidebar user display
+      const userEl = document.querySelector('.sidebar-footer span');
+      if (userEl && info.email) userEl.textContent = info.email;
+    } catch {
+      window.location.href = '/?session_expired=1';
+      return;
+    }
+  }
+
   const path = window.location.pathname;
   document.querySelectorAll('.nav-link').forEach(link => {
     const href = link.getAttribute('href');
@@ -30,15 +47,14 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // Avatar dropdown
+  // Avatar dropdown → logout
   const avatarBtn = document.getElementById('avatar-btn');
   if (avatarBtn) {
     avatarBtn.addEventListener('click', () => {
-      window.location.href = '/settings.html';
+      window.location.href = '/auth/logout';
     });
   }
 });
-
 
 export function showToast(message, type = 'info') {
   const container = document.getElementById('toast-container');
