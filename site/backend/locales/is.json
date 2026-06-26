@@ -1,0 +1,17 @@
+{
+  "app.name": "AkurAI-CRM",
+  "nav.dashboard": "Ma laborð",
+  "nav.people": "Tengiliðir",
+  "nav.companies": "Fyrirtæki",
+  "nav.opportunities": "Tækifæri",
+  "nav.tasks": "Verkefni",
+  "nav.notes": "Glósur",
+  "nav.settings": "Stillingar",
+  "common.search": "Leita...",
+  "common.add": "Bæta við",
+  "common.edit": "Breyta",
+  "common.delete": "Eyða",
+  "common.save": "Vista",
+  "common.cancel": "Hætta við",
+  "common.loading": "Hleð..."
+}

@@ -1,0 +1,13 @@
+[package]
+name = "crm-core"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+description = "AkurAI-CRM core data model: entities, fields, metadata, types."
+
+[lib]
+path = "src/lib.rs"
+
+[dependencies]
+akurai-json = { path = "../../../AkurAI-Framework/crates/json" }
+akurai-schema = { path = "../../../AkurAI-Framework/crates/schema" }

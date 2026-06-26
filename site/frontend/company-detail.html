@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NordicTech — AkurAI-CRM</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar">
+      <div class="sidebar-brand">
+        <div class="sidebar-brand-icon">A</div>
+        <div class="sidebar-brand-text">AkurAI<span>-CRM</span></div>
+      </div>
+      <nav class="sidebar-nav">
+        <div class="sidebar-section">Main</div>
+        <a href="/dashboard.html" class="nav-link">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+          Dashboard
+        </a>
+        <a href="/people.html" class="nav-link">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          People
+        </a>
+        <a href="/companies.html" class="nav-link active">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+          Companies
+        </a>
+        <a href="/opportunities.html" class="nav-link">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+          Opportunities
+        </a>
+        <a href="/tasks.html" class="nav-link">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+          Tasks
+        </a>
+        <a href="/notes.html" class="nav-link">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+          Notes
+        </a>
+        <div class="sidebar-section" style="margin-top:var(--space-4);">Workspace</div>
+        <a href="/settings.html" class="nav-link">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+          Settings
+        </a>
+      </nav>
+      <div class="sidebar-footer">
+        <div class="nav-link" style="cursor:default;opacity:0.6;">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+          <span style="font-size:var(--text-xs);">olafur@akurai.is</span>
+        </div>
+      </div>
+    </aside>
+
+    <div class="main-area">
+      <header class="topbar">
+        <div class="topbar-title">
+          <a href="/companies.html" style="color:var(--color-text-secondary);font-weight:var(--weight-normal);font-size:var(--text-sm);">Companies</a>
+          <span style="color:var(--color-text-tertiary);margin:0 var(--space-2);">/</span>
+          NordicTech
+        </div>
+        <div class="topbar-spacer"></div>
+        <div class="topbar-actions">
+          <button class="icon-btn" id="notif-btn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+          </button>
+          <div class="avatar" id="avatar-btn" style="cursor:pointer;" title="Profile">OU</div>
+        </div>
+      </header>
+
+      <div class="main-content">
+        <div class="detail-header" style="border:1px solid var(--color-border);border-radius:var(--radius-lg);background:var(--color-surface);margin-bottom:var(--space-6);padding:var(--space-8);">
+          <div class="detail-avatar" style="width:72px;height:72px;font-size:var(--text-2xl);background:var(--color-info-light);color:var(--color-info);">N</div>
+          <div class="detail-info">
+            <h1>NordicTech</h1>
+            <div class="detail-subtitle">nordictech.is · <a href="https://nordictech.is" target="_blank">Visit website</a></div>
+            <div style="margin-top:var(--space-3);display:flex;gap:var(--space-1);flex-wrap:wrap;">
+              <span class="badge badge-blue">SaaS</span>
+              <span class="badge badge-indigo">Customer</span>
+            </div>
+          </div>
+          <div class="detail-actions">
+            <button class="btn btn-secondary btn-sm" onclick="alert('Edit Company modal')">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+              Edit
+            </button>
+            <button class="btn btn-danger btn-sm" onclick="if(confirm('Delete this company?'))alert('Deleted')">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>
+              Delete
+            </button>
+            <button class="btn btn-primary btn-sm" onclick="alert('New Opportunity modal')">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+              Add Deal
+            </button>
+          </div>
+        </div>
+
+        <div class="detail-tabs">
+          <button class="detail-tab active" data-tab="overview">Overview</button>
+          <button class="detail-tab" data-tab="people-tab">People (2)</button>
+          <button class="detail-tab" data-tab="deals-tab">Opportunities (2)</button>
+          <button class="detail-tab" data-tab="activity">Activity Timeline</button>
+        </div>
+
+        <!-- Tab: Overview -->
+        <div class="detail-body tab-content" id="tab-overview">
+          <div class="info-grid">
+            <div class="info-card">
+              <h3>Company Information</h3>
+              <div style="display:grid;grid-template-columns:1fr;gap:var(--space-4);">
+                <div class="info-field">
+                  <div class="info-label">Domain</div>
+                  <div class="info-value">nordictech.is</div>
+                </div>
+                <div class="info-field">
+                  <div class="info-label">Annual Revenue</div>
+                  <div class="info-value">$4.2M</div>
+                </div>
+                <div class="info-field">
+                  <div class="info-label">Employees</div>
+                  <div class="info-value">45</div>
+                </div>
+                <div class="info-field">
+                  <div class="info-label">Address</div>
+                  <div class="info-value">Skúlagata 12, 101 Reykjavík, Iceland</div>
+                </div>
+                <div class="info-field">
+                  <div class="info-label">Phone</div>
+                  <div class="info-value">+354 510 4000</div>
+                </div>
+                <div class="info-field">
+                  <div class="info-label">Industry</div>
+                  <div class="info-value">SaaS / Enterprise Software</div>
+                </div>
+              </div>
+            </div>
+            <div class="info-card">
+              <h3>Description</h3>
+              <p style="font-size:var(--text-sm);color:var(--color-text-secondary);line-height:var(--leading-relaxed);">
+                NordicTech is a Reykjavík-based SaaS company specializing in enterprise resource planning
+                solutions for Nordic businesses. Founded in 2018, they serve over 200 customers across
+                Iceland, Norway, and Sweden. They are currently evaluating new platform solutions to
+                replace their legacy infrastructure.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tab: People -->
+        <div class="detail-body tab-content" id="tab-people-tab" style="display:none;">
+          <div class="info-card">
+            <h3>People at NordicTech</h3>
+            <div style="display:flex;flex-direction:column;">
+              <div style="display:flex;align-items:center;justify-content:space-between;padding:var(--space-3) 0;border-bottom:1px solid var(--color-border-light);">
+                <div style="display:flex;align-items:center;gap:var(--space-3);">
+                  <div class="avatar avatar-sm">JJ</div>
+                  <div>
+                    <div style="font-size:var(--text-sm);font-weight:var(--weight-medium);"><a href="/person-detail.html">Jóna Jónsdóttir</a></div>
+                    <div style="font-size:var(--text-xs);color:var(--color-text-secondary);">CEO</div>
+                  </div>
+                </div>
+                <span class="badge badge-indigo">Decision Maker</span>
+              </div>
+              <div style="display:flex;align-items:center;justify-content:space-between;padding:var(--space-3) 0;">
+                <div style="display:flex;align-items:center;gap:var(--space-3);">
+                  <div class="avatar avatar-sm">KE</div>
+                  <div>
+                    <div style="font-size:var(--text-sm);font-weight:var(--weight-medium);"><a href="/person-detail.html">Katrín Einarsdóttir</a></div>
+                    <div style="font-size:var(--text-xs);color:var(--color-text-secondary);">Product Manager</div>
+                  </div>
+                </div>
+                <span class="badge badge-blue">Champion</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tab: Deals -->
+        <div class="detail-body tab-content" id="tab-deals-tab" style="display:none;">
+          <div class="info-card">
+            <h3>Opportunities</h3>
+            <div style="display:flex;flex-direction:column;">
+              <div style="display:flex;align-items:center;justify-content:space-between;padding:var(--space-3) 0;border-bottom:1px solid var(--color-border-light);">
+                <div>
+                  <div style="font-size:var(--text-sm);font-weight:var(--weight-medium);"><a href="/opportunity-detail.html">NordicTech Platform Deal</a></div>
+                  <div style="font-size:var(--text-xs);color:var(--color-text-secondary);">Jóna Jónsdóttir · Closes Jul 30</div>
+                </div>
+                <div style="display:flex;align-items:center;gap:var(--space-3);">
+                  <span style="font-size:var(--text-sm);font-weight:var(--weight-semibold);">$45,000</span>
+                  <span class="badge badge-indigo">Meeting</span>
+                </div>
+              </div>
+              <div style="display:flex;align-items:center;justify-content:space-between;padding:var(--space-3) 0;">
+                <div>
+                  <div style="font-size:var(--text-sm);font-weight:var(--weight-medium);"><a href="/opportunity-detail.html">Consulting Retainer</a></div>
+                  <div style="font-size:var(--text-xs);color:var(--color-text-secondary);">Jóna Jónsdóttir · Closes Aug 15</div>
+                </div>
+                <div style="display:flex;align-items:center;gap:var(--space-3);">
+                  <span style="font-size:var(--text-sm);font-weight:var(--weight-semibold);">$12,000</span>
+                  <span class="badge badge-blue">Screening</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tab: Activity -->
+        <div class="detail-body tab-content" id="tab-activity" style="display:none;">
+          <div class="timeline">
+            <div class="timeline-item">
+              <div class="timeline-dot primary"></div>
+              <div class="timeline-content">
+                <div class="timeline-title">Meeting with Jóna Jónsdóttir</div>
+                <div class="timeline-text">Discussed platform migration scope and timeline</div>
+                <div class="timeline-meta">Today at 10:30 AM</div>
+              </div>
+            </div>
+            <div class="timeline-item">
+              <div class="timeline-dot success"></div>
+              <div class="timeline-content">
+                <div class="timeline-title">NordicTech Platform Deal moved to Meeting</div>
+                <div class="timeline-text">Deal progressed from Screening to Meeting stage</div>
+                <div class="timeline-meta">Yesterday at 3:00 PM</div>
+              </div>
+            </div>
+            <div class="timeline-item">
+              <div class="timeline-dot"></div>
+              <div class="timeline-content">
+                <div class="timeline-title">Company created</div>
+                <div class="timeline-text">NordicTech was added to the CRM</div>
+                <div class="timeline-meta">Jun 20, 2026</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="toast-container" id="toast-container"></div>
+  <script type="module" src="app.js"></script>
+  <script type="module">
+    document.querySelectorAll('.detail-tab').forEach(tab => {
+      tab.addEventListener('click', () => {
+        document.querySelectorAll('.detail-tab').forEach(t => t.classList.remove('active'));
+        tab.classList.add('active');
+        document.querySelectorAll('.tab-content').forEach(c => c.style.display = 'none');
+        const target = document.getElementById('tab-' + tab.dataset.tab);
+        if (target) target.style.display = 'block';
+      });
+    });
+  </script>
+</body>
+</html>

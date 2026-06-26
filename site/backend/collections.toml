@@ -1,0 +1,51 @@
+# AkurAI-CRM data model — declarative schema
+# Auto-generates REST API for all collections
+
+[collections.people]
+fields = [
+    { name = "firstName", type = "Text", label = "First Name", required = true, searchable = true },
+    { name = "lastName", type = "Text", label = "Last Name", required = true, searchable = true },
+    { name = "email", type = "Text", label = "Email", searchable = true },
+    { name = "phone", type = "Text", label = "Phone" },
+    { name = "jobTitle", type = "Text", label = "Job Title", searchable = true },
+    { name = "companyId", type = "Number", label = "Company" },
+    { name = "linkedinUrl", type = "Text", label = "LinkedIn URL" },
+    { name = "avatarUrl", type = "Text", label = "Avatar" },
+]
+
+[collections.companies]
+fields = [
+    { name = "name", type = "Text", label = "Name", required = true, searchable = true },
+    { name = "domainName", type = "Text", label = "Domain", searchable = true },
+    { name = "annualRevenue", type = "Number", label = "Annual Revenue" },
+    { name = "employeeCount", type = "Number", label = "Employees" },
+    { name = "linkedinUrl", type = "Text", label = "LinkedIn" },
+    { name = "websiteUrl", type = "Text", label = "Website" },
+    { name = "address", type = "Text", label = "Address" },
+]
+
+[collections.opportunities]
+fields = [
+    { name = "name", type = "Text", label = "Deal Name", required = true, searchable = true },
+    { name = "amount", type = "Number", label = "Amount" },
+    { name = "stage", type = "Select", label = "Stage", options = ["new", "screening", "meeting", "proposal", "negotiation", "won", "lost"] },
+    { name = "closeDate", type = "Number", label = "Close Date" },
+    { name = "probability", type = "Number", label = "Probability (%)" },
+    { name = "personId", type = "Number", label = "Contact" },
+    { name = "companyId", type = "Number", label = "Company" },
+]
+
+[collections.tasks]
+fields = [
+    { name = "title", type = "Text", label = "Title", required = true, searchable = true },
+    { name = "description", type = "Text", label = "Description" },
+    { name = "status", type = "Select", label = "Status", options = ["todo", "in_progress", "done", "cancelled"] },
+    { name = "dueAt", type = "Number", label = "Due Date" },
+    { name = "assigneeId", type = "Number", label = "Assignee" },
+]
+
+[collections.notes]
+fields = [
+    { name = "title", type = "Text", label = "Title", searchable = true },
+    { name = "body", type = "Text", label = "Body", required = true },
+]

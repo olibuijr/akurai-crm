@@ -1,0 +1,19 @@
+[package]
+name = "akurai-crm"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+description = "AkurAI-CRM CLI: serve and manage your CRM."
+
+[[bin]]
+name = "akurai-crm"
+path = "src/main.rs"
+
+[dependencies]
+crm-core = { path = "../crm-core" }
+crm-api = { path = "../crm-api" }
+akurai-http = { path = "../../../AkurAI-Framework/crates/http" }
+akurai-json = { path = "../../../AkurAI-Framework/crates/json" }
+akurai-router = { path = "../../../AkurAI-Framework/crates/router" }
+akurai-storage = { path = "../../../AkurAI-Framework/crates/storage" }
+akurai-collections = { path = "../../../AkurAI-Framework/crates/collections" }

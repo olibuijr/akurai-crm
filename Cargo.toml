@@ -1,0 +1,22 @@
+[workspace]
+resolver = "2"
+members = [
+    "crates/crm-core",
+    "crates/crm-api",
+    "crates/crm-cli",
+    "crates/crm-mcp",
+]
+
+[workspace.package]
+version = "0.1.0"
+edition = "2021"
+license = "MIT"
+repository = "https://github.com/olibuijr/akurai-crm"
+authors = ["Ólafur Búi Ólafsson"]
+
+[profile.release]
+opt-level = 3
+lto = "fat"
+codegen-units = 1
+panic = "abort"
+strip = true

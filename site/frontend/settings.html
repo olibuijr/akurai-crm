@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Settings — AkurAI-CRM</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar">
+      <div class="sidebar-brand">
+        <div class="sidebar-brand-icon">A</div>
+        <div class="sidebar-brand-text">AkurAI<span>-CRM</span></div>
+      </div>
+      <nav class="sidebar-nav">
+        <div class="sidebar-section">Main</div>
+        <a href="/dashboard.html" class="nav-link">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+          Dashboard
+        </a>
+        <a href="/people.html" class="nav-link">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          People
+        </a>
+        <a href="/companies.html" class="nav-link">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+          Companies
+        </a>
+        <a href="/opportunities.html" class="nav-link">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+          Opportunities
+        </a>
+        <a href="/tasks.html" class="nav-link">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+          Tasks
+        </a>
+        <a href="/notes.html" class="nav-link">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+          Notes
+        </a>
+        <div class="sidebar-section" style="margin-top:var(--space-4);">Workspace</div>
+        <a href="/settings.html" class="nav-link active">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+          Settings
+        </a>
+      </nav>
+      <div class="sidebar-footer">
+        <div class="nav-link" style="cursor:default;opacity:0.6;">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+          <span style="font-size:var(--text-xs);">olafur@akurai.is</span>
+        </div>
+      </div>
+    </aside>
+
+    <div class="main-area">
+      <header class="topbar">
+        <div class="topbar-title">Settings</div>
+        <div class="topbar-spacer"></div>
+        <div class="topbar-actions">
+          <button class="icon-btn" id="notif-btn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+          </button>
+          <div class="avatar" id="avatar-btn" style="cursor:pointer;" title="Profile">OU</div>
+        </div>
+      </header>
+
+      <div class="main-content">
+        <div class="settings-layout">
+          <nav class="settings-nav">
+            <button class="settings-nav-item active" data-section="profile">Profile</button>
+            <button class="settings-nav-item" data-section="workspace">Workspace</button>
+            <button class="settings-nav-item" data-section="preferences">Preferences</button>
+            <button class="settings-nav-item" data-section="api">API Keys</button>
+            <button class="settings-nav-item" data-section="team">Team</button>
+          </nav>
+
+          <div class="settings-sections">
+            <!-- Profile -->
+            <div class="settings-section" id="section-profile">
+              <h2 class="settings-section-title">Profile</h2>
+              <p class="settings-section-desc">Manage your personal information and avatar</p>
+
+              <div class="settings-card">
+                <div style="display:flex;align-items:center;gap:var(--space-6);margin-bottom:var(--space-8);">
+                  <div class="avatar avatar-lg" style="width:64px;height:64px;font-size:var(--text-xl);">OU</div>
+                  <div>
+                    <button class="btn btn-secondary btn-sm" onclick="alert('Upload photo')">Change Photo</button>
+                    <p style="font-size:var(--text-xs);color:var(--color-text-tertiary);margin-top:var(--space-1);">JPG, PNG, or GIF. 1MB max.</p>
+                  </div>
+                </div>
+
+                <div class="form-row">
+                  <div class="form-group">
+                    <label class="form-label" for="first-name">First Name</label>
+                    <input class="form-input" id="first-name" value="Ólafur" placeholder="First name">
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label" for="last-name">Last Name</label>
+                    <input class="form-input" id="last-name" value="Björnsson" placeholder="Last name">
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label" for="settings-email">Email address</label>
+                  <input class="form-input" id="settings-email" type="email" value="olafur@akurai.is" placeholder="you@company.com">
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label" for="phone">Phone</label>
+                  <input class="form-input" id="phone" value="+354 123 4567" placeholder="+354...">
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label" for="job-title">Job Title</label>
+                  <input class="form-input" id="job-title" value="CEO" placeholder="Your role">
+                </div>
+
+                <div class="form-actions">
+                  <button class="btn btn-secondary" onclick="alert('Discard changes')">Cancel</button>
+                  <button class="btn btn-primary" onclick="showToast('Profile updated', 'success')">Save Changes</button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Workspace -->
+            <div class="settings-section" id="section-workspace" style="display:none;">
+              <h2 class="settings-section-title">Workspace</h2>
+              <p class="settings-section-desc">Manage your CRM workspace settings</p>
+
+              <div class="settings-card">
+                <div class="form-group">
+                  <label class="form-label" for="workspace-name">Workspace Name</label>
+                  <input class="form-input" id="workspace-name" value="AkurAI" placeholder="Workspace name">
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label" for="workspace-domain">Workspace Domain</label>
+                  <input class="form-input" id="workspace-domain" value="akurai.is" placeholder="your-domain.com">
+                  <div class="form-hint">Used for your CRM URL: https://akurai.is/crm</div>
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label" for="workspace-logo">Workspace Logo</label>
+                  <input class="form-input" id="workspace-logo" value="/logo.png" placeholder="Logo URL">
+                </div>
+
+                <div class="form-actions">
+                  <button class="btn btn-secondary" onclick="alert('Discard changes')">Cancel</button>
+                  <button class="btn btn-primary" onclick="showToast('Workspace updated', 'success')">Save Changes</button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Preferences -->
+            <div class="settings-section" id="section-preferences" style="display:none;">
+              <h2 class="settings-section-title">Preferences</h2>
+              <p class="settings-section-desc">Customize your CRM experience</p>
+
+              <div class="settings-card">
+                <div class="form-group">
+                  <label class="form-label" for="theme">Theme</label>
+                  <select class="form-select" id="theme">
+                    <option value="light" selected>Light</option>
+                    <option value="dark">Dark</option>
+                    <option value="system">System</option>
+                  </select>
+                </div>
+
+                <div class="form-row">
+                  <div class="form-group">
+                    <label class="form-label" for="locale">Locale</label>
+                    <select class="form-select" id="locale">
+                      <option value="en-US" selected>English (US)</option>
+                      <option value="en-GB">English (UK)</option>
+                      <option value="is-IS">Icelandic (IS)</option>
+                    </select>
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label" for="timezone">Timezone</label>
+                    <select class="form-select" id="timezone">
+                      <option value="Atlantic/Reykjavik" selected>Atlantic/Reykjavik (GMT+0)</option>
+                      <option value="Europe/London">Europe/London (GMT+1)</option>
+                      <option value="America/New_York">America/New_York (EST)</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label">Notifications</label>
+                  <div style="display:flex;flex-direction:column;gap:var(--space-3);">
+                    <label class="form-checkbox">
+                      <input type="checkbox" checked> Email notifications for new deals
+                    </label>
+                    <label class="form-checkbox">
+                      <input type="checkbox" checked> Task reminders
+                    </label>
+                    <label class="form-checkbox">
+                      <input type="checkbox"> Weekly pipeline digest
+                    </label>
+                    <label class="form-checkbox">
+                      <input type="checkbox" checked> Activity feed updates
+                    </label>
+                  </div>
+                </div>
+
+                <div class="form-actions">
+                  <button class="btn btn-primary" onclick="showToast('Preferences saved', 'success')">Save Preferences</button>
+                </div>
+              </div>
+            </div>
+
+            <!-- API Keys -->
+            <div class="settings-section" id="section-api" style="display:none;">
+              <h2 class="settings-section-title">API Keys</h2>
+              <p class="settings-section-desc">Manage API keys for programmatic access to your CRM data</p>
+
+              <div class="settings-card">
+                <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:var(--space-4);">
+                  <h3 style="font-size:var(--text-base);">Your API Keys</h3>
+                  <button class="btn btn-primary btn-sm" onclick="alert('Generate new key')">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                    Generate Key
+                  </button>
+                </div>
+
+                <div style="border:1px solid var(--color-border);border-radius:var(--radius-md);overflow:hidden;">
+                  <div style="display:flex;align-items:center;justify-content:space-between;padding:var(--space-3) var(--space-4);border-bottom:1px solid var(--color-border);">
+                    <div>
+                      <div style="font-size:var(--text-sm);font-weight:var(--weight-medium);">Production API Key</div>
+                      <div style="font-size:var(--text-xs);color:var(--color-text-tertiary);">Created Jun 15, 2026 · Full access</div>
+                    </div>
+                    <div style="display:flex;align-items:center;gap:var(--space-2);">
+                      <code style="font-family:var(--font-mono);font-size:var(--text-xs);color:var(--color-text-tertiary);background:var(--color-bg);padding:var(--space-1) var(--space-2);border-radius:var(--radius-sm);">akr••••••••••••••a8f3</code>
+                      <button class="btn btn-ghost btn-sm" onclick="showToast('API key copied', 'success')">Copy</button>
+                      <button class="btn btn-danger btn-sm" onclick="if(confirm('Revoke this key?'))showToast('Key revoked','success')">Revoke</button>
+                    </div>
+                  </div>
+                  <div style="display:flex;align-items:center;justify-content:space-between;padding:var(--space-3) var(--space-4);">
+                    <div>
+                      <div style="font-size:var(--text-sm);font-weight:var(--weight-medium);">Development API Key</div>
+                      <div style="font-size:var(--text-xs);color:var(--color-text-tertiary);">Created Jun 10, 2026 · Read-only</div>
+                    </div>
+                    <div style="display:flex;align-items:center;gap:var(--space-2);">
+                      <code style="font-family:var(--font-mono);font-size:var(--text-xs);color:var(--color-text-tertiary);background:var(--color-bg);padding:var(--space-1) var(--space-2);border-radius:var(--radius-sm);">akr••••••••••••••b2d7</code>
+                      <button class="btn btn-ghost btn-sm" onclick="showToast('API key copied', 'success')">Copy</button>
+                      <button class="btn btn-danger btn-sm" onclick="if(confirm('Revoke this key?'))showToast('Key revoked','success')">Revoke</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Team -->
+            <div class="settings-section" id="section-team" style="display:none;">
+              <h2 class="settings-section-title">Team</h2>
+              <p class="settings-section-desc">Manage team members and their roles</p>
+
+              <div class="settings-card">
+                <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:var(--space-4);">
+                  <h3 style="font-size:var(--text-base);">Team Members</h3>
+                  <button class="btn btn-primary btn-sm" onclick="alert('Invite member modal')">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                    Invite Member
+                  </button>
+                </div>
+                <div style="display:flex;flex-direction:column;">
+                  <div style="display:flex;align-items:center;justify-content:space-between;padding:var(--space-3) 0;border-bottom:1px solid var(--color-border-light);">
+                    <div style="display:flex;align-items:center;gap:var(--space-3);">
+                      <div class="avatar avatar-sm">OU</div>
+                      <div>
+                        <div style="font-size:var(--text-sm);font-weight:var(--weight-medium);">Ólafur Björnsson</div>
+                        <div style="font-size:var(--text-xs);color:var(--color-text-secondary);">olafur@akurai.is</div>
+                      </div>
+                    </div>
+                    <span class="badge badge-blue">Admin</span>
+                  </div>
+                  <div style="display:flex;align-items:center;justify-content:space-between;padding:var(--space-3) 0;">
+                    <div style="display:flex;align-items:center;gap:var(--space-3);">
+                      <div class="avatar avatar-sm">AK</div>
+                      <div>
+                        <div style="font-size:var(--text-sm);font-weight:var(--weight-medium);">Anna Kristín</div>
+                        <div style="font-size:var(--text-xs);color:var(--color-text-secondary);">anna@akurai.is</div>
+                      </div>
+                    </div>
+                    <span class="badge badge-slate">Member</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="toast-container" id="toast-container"></div>
+  <script type="module" src="app.js"></script>
+  <script type="module">
+    import { showToast } from './app.js';
+    window.showToast = showToast;
+
+    document.querySelectorAll('.settings-nav-item').forEach(item => {
+      item.addEventListener('click', () => {
+        document.querySelectorAll('.settings-nav-item').forEach(i => i.classList.remove('active'));
+        item.classList.add('active');
+        document.querySelectorAll('.settings-section').forEach(s => s.style.display = 'none');
+        const target = document.getElementById('section-' + item.dataset.section);
+        if (target) target.style.display = 'block';
+      });
+    });
+  </script>
+</body>
+</html>

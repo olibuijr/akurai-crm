@@ -1,0 +1,16 @@
+[package]
+name = "crm-mcp"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+description = "AkurAI-CRM MCP server — exposes CRM as tools for AI agents."
+
+[lib]
+path = "src/lib.rs"
+
+[dependencies]
+crm-core = { path = "../crm-core" }
+crm-api = { path = "../crm-api" }
+akurai-http = { path = "../../../AkurAI-Framework/crates/http" }
+akurai-json = { path = "../../../AkurAI-Framework/crates/json" }
+akurai-storage = { path = "../../../AkurAI-Framework/crates/storage" }

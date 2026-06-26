@@ -1,0 +1,17 @@
+[package]
+name = "crm-api"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+description = "AkurAI-CRM REST API: CRUD handlers for all CRM entities."
+
+[lib]
+path = "src/lib.rs"
+
+[dependencies]
+crm-core = { path = "../crm-core" }
+akurai-http = { path = "../../../AkurAI-Framework/crates/http" }
+akurai-json = { path = "../../../AkurAI-Framework/crates/json" }
+akurai-router = { path = "../../../AkurAI-Framework/crates/router" }
+akurai-collections = { path = "../../../AkurAI-Framework/crates/collections" }
+akurai-storage = { path = "../../../AkurAI-Framework/crates/storage" }

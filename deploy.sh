@@ -1,9 +1,72 @@
 #!/usr/bin/env bash
+# deploy.sh — AkurAI-CRM release engine.
 set -euo pipefail
-VERSION=$(cat VERSION)
-echo "akurai-crm v$VERSION release"
-# Quality gate
-cargo fmt --check
-cargo clippy -D warnings
-cargo test --all
-echo "✓ All checks passed"
+
+REPO="olibuijr/akurai-crm"
+ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+cd "$ROOT"
+
+say() { printf '\033[1;34m▸ %s\033[0m\n' "$*"; }
+die() { printf '\033[1;31m✗ %s\033[0m\n' "$*" >&2; exit 1; }
+
+BUMP="${1:-patch}"
+case "$BUMP" in patch|minor|major) ;; *)
+  echo "usage: $0 [patch|minor|major]" >&2; exit 2
+;; esac
+
+# ── 1. Quality gate ────────────────────────────────────────────────────────
+say "Gate: rustfmt"
+cargo fmt --all -- --check || die "formatting failed (run: cargo fmt --all)"
+
+say "Gate: clippy (-D warnings)"
+cargo clippy --all-targets --all-features -- -D warnings || die "clippy failed"
+
+say "Gate: tests"
+cargo test --all || die "tests failed"
+
+# ── 2. Version bump (lockstep) ─────────────────────────────────────────────
+CUR="$(tr -d '[:space:]' < VERSION)"
+IFS='.' read -r MA MI PA <<< "$CUR"
+case "$BUMP" in
+  major) MA=$((MA+1)); MI=0; PA=0 ;;
+  minor) MI=$((MI+1)); PA=0 ;;
+  patch) PA=$((PA+1)) ;;
+esac
+NEW="$MA.$MI.$PA"
+say "Version: $CUR → $NEW ($BUMP)"
+printf '%s\n' "$NEW" > VERSION
+sed -i -E "s/^version = \"$CUR\"/version = \"$NEW\"/" Cargo.toml
+if [ -f site/backend/page.json ]; then
+  sed -i -E "s/\"version\": \"v[0-9]+\.[0-9]+\.[0-9]+\"/\"version\": \"v$NEW\"/" site/backend/page.json
+fi
+
+# ── 3. CHANGELOG ───────────────────────────────────────────────────────────
+DATE="$(date +%Y-%m-%d)"
+say "CHANGELOG: cutting [$NEW]"
+if [ -f CHANGELOG.md ]; then
+  awk -v unrel="## [Unreleased]" -V vh="## [$NEW] - $DATE" '
+    $0 == unrel { print unrel; print ""; print vh; next }
+    { print }
+  ' CHANGELOG.md > CHANGELOG.md.tmp && mv CHANGELOG.md.tmp CHANGELOG.md
+fi
+
+# ── 4. Commit, tag, push ───────────────────────────────────────────────────
+say "Git: commit + tag v$NEW"
+git add -A
+git commit -q -m "release: v$NEW"
+git tag -a "v$NEW" -m "v$NEW"
+
+if ! git remote get-url origin >/dev/null 2>&1; then
+  if gh repo view "$REPO" >/dev/null 2>&1; then
+    git remote add origin "https://github.com/$REPO.git"
+  else
+    say "Creating GitHub repo $REPO (private)"
+    gh repo create "$REPO" --private --source=. --remote=origin
+  fi
+fi
+
+say "Git: push"
+git push -u origin HEAD
+git push origin "v$NEW"
+
+say "Released v$NEW ✓"

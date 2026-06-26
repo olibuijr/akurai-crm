@@ -1,0 +1,37 @@
+{
+  "site": {
+    "title": "AkurAI-CRM",
+    "description": "Pure Rust CRM — reverse-engineered from Twenty CRM",
+    "url": "https://akurai-crm.olibuijr.com",
+    "version": "v0.1.0"
+  },
+  "brand": {
+    "name": "AkurAI-CRM",
+    "tagline": "Enterprise CRM, Pure Rust",
+    "logo": "/logo.svg"
+  },
+  "nav": [
+    { "label": "Dashboard", "path": "/dashboard", "icon": "layout-dashboard" },
+    { "label": "People", "path": "/people", "icon": "users" },
+    { "label": "Companies", "path": "/companies", "icon": "building" },
+    { "label": "Opportunities", "path": "/opportunities", "icon": "trending-up" },
+    { "label": "Tasks", "path": "/tasks", "icon": "check-square" },
+    { "label": "Notes", "path": "/notes", "icon": "file-text" },
+    { "label": "Settings", "path": "/settings", "icon": "settings" }
+  ],
+  "pipeline_stages": [
+    { "key": "new", "label": "New", "color": "#94a3b8" },
+    { "key": "screening", "label": "Screening", "color": "#60a5fa" },
+    { "key": "meeting", "label": "Meeting", "color": "#818cf8" },
+    { "key": "proposal", "label": "Proposal", "color": "#a78bfa" },
+    { "key": "negotiation", "label": "Negotiation", "color": "#f59e0b" },
+    { "key": "won", "label": "Won", "color": "#22c55e" },
+    { "key": "lost", "label": "Lost", "color": "#ef4444" }
+  ],
+  "task_statuses": [
+    { "key": "todo", "label": "Todo", "color": "#94a3b8" },
+    { "key": "in_progress", "label": "In Progress", "color": "#60a5fa" },
+    { "key": "done", "label": "Done", "color": "#22c55e" },
+    { "key": "cancelled", "label": "Cancelled", "color": "#ef4444" }
+  ]
+}

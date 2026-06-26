@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Companies — AkurAI-CRM</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar">
+      <div class="sidebar-brand">
+        <div class="sidebar-brand-icon">A</div>
+        <div class="sidebar-brand-text">AkurAI<span>-CRM</span></div>
+      </div>
+      <nav class="sidebar-nav">
+        <div class="sidebar-section">Main</div>
+        <a href="/dashboard.html" class="nav-link">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+          Dashboard
+        </a>
+        <a href="/people.html" class="nav-link">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          People
+        </a>
+        <a href="/companies.html" class="nav-link active">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+          Companies
+        </a>
+        <a href="/opportunities.html" class="nav-link">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+          Opportunities
+        </a>
+        <a href="/tasks.html" class="nav-link">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+          Tasks
+        </a>
+        <a href="/notes.html" class="nav-link">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+          Notes
+        </a>
+        <div class="sidebar-section" style="margin-top:var(--space-4);">Workspace</div>
+        <a href="/settings.html" class="nav-link">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+          Settings
+        </a>
+      </nav>
+      <div class="sidebar-footer">
+        <div class="nav-link" style="cursor:default;opacity:0.6;">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+          <span style="font-size:var(--text-xs);">olafur@akurai.is</span>
+        </div>
+      </div>
+    </aside>
+
+    <div class="main-area">
+      <header class="topbar">
+        <div class="topbar-title">Companies</div>
+        <div class="topbar-spacer"></div>
+        <div class="search-bar" style="width:240px;">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          <input type="text" placeholder="Search companies..." id="search-companies">
+        </div>
+        <div class="topbar-actions">
+          <button class="icon-btn" id="notif-btn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+          </button>
+          <div class="avatar" id="avatar-btn" style="cursor:pointer;" title="Profile">OU</div>
+        </div>
+      </header>
+
+      <div class="main-content">
+        <div class="page-header">
+          <h1>Companies</h1>
+          <div class="page-header-actions">
+            <a href="#" class="btn btn-primary" onclick="alert('Add Company modal would open')">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+              Add Company
+            </a>
+          </div>
+        </div>
+
+        <div class="table-container">
+          <table>
+            <thead>
+              <tr>
+                <th class="sortable">Name</th>
+                <th>Domain</th>
+                <th>Revenue</th>
+                <th>Employees</th>
+                <th>Contacts</th>
+                <th>Created</th>
+              </tr>
+            </thead>
+            <tbody id="companies-table-body">
+              <tr>
+                <td><a href="/company-detail.html" style="font-weight:var(--weight-medium);">NordicTech</a></td>
+                <td class="cell-muted">nordictech.is</td>
+                <td class="cell-muted">$4.2M</td>
+                <td class="cell-muted">45</td>
+                <td class="cell-muted">2</td>
+                <td class="cell-muted">Jun 20, 2026</td>
+              </tr>
+              <tr>
+                <td><a href="/company-detail.html" style="font-weight:var(--weight-medium);">DataFlow Inc</a></td>
+                <td class="cell-muted">dataflow.com</td>
+                <td class="cell-muted">$12.8M</td>
+                <td class="cell-muted">120</td>
+                <td class="cell-muted">2</td>
+                <td class="cell-muted">Jun 18, 2026</td>
+              </tr>
+              <tr>
+                <td><a href="/company-detail.html" style="font-weight:var(--weight-medium);">Arktis AI</a></td>
+                <td class="cell-muted">arktis.ai</td>
+                <td class="cell-muted">$2.1M</td>
+                <td class="cell-muted">28</td>
+                <td class="cell-muted">2</td>
+                <td class="cell-muted">Jun 15, 2026</td>
+              </tr>
+              <tr>
+                <td><a href="/company-detail.html" style="font-weight:var(--weight-medium);">Vortex Solutions</a></td>
+                <td class="cell-muted">vortex.is</td>
+                <td class="cell-muted">$8.5M</td>
+                <td class="cell-muted">75</td>
+                <td class="cell-muted">1</td>
+                <td class="cell-muted">Jun 10, 2026</td>
+              </tr>
+              <tr>
+                <td><a href="/company-detail.html" style="font-weight:var(--weight-medium);">IceCloud Systems</a></td>
+                <td class="cell-muted">icecloud.is</td>
+                <td class="cell-muted">$1.5M</td>
+                <td class="cell-muted">15</td>
+                <td class="cell-muted">0</td>
+                <td class="cell-muted">Jun 3, 2026</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <div class="pagination">
+            <div class="pagination-info">Showing 1-5 of 12 companies</div>
+            <div class="pagination-buttons">
+              <button class="pagination-btn" disabled>&lsaquo;</button>
+              <button class="pagination-btn active">1</button>
+              <button class="pagination-btn">2</button>
+              <button class="pagination-btn">3</button>
+              <button class="pagination-btn">&rsaquo;</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="toast-container" id="toast-container"></div>
+  <script type="module" src="app.js"></script>
+</body>
+</html>

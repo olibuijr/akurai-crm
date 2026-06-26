@@ -2,9 +2,14 @@
 /data/
 *.db
 *.db-journal
+*.db-wal
 .env
 .env.*
 .DS_Store
 *.swp
+*.swo
 .claude/
+.idea/
+.vscode/
 node_modules/
+/.references/

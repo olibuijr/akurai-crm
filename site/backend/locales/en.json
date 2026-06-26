@@ -1,0 +1,17 @@
+{
+  "app.name": "AkurAI-CRM",
+  "nav.dashboard": "Dashboard",
+  "nav.people": "People",
+  "nav.companies": "Companies",
+  "nav.opportunities": "Opportunities",
+  "nav.tasks": "Tasks",
+  "nav.notes": "Notes",
+  "nav.settings": "Settings",
+  "common.search": "Search...",
+  "common.add": "Add",
+  "common.edit": "Edit",
+  "common.delete": "Delete",
+  "common.save": "Save",
+  "common.cancel": "Cancel",
+  "common.loading": "Loading..."
+}
