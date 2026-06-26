@@ -43,6 +43,7 @@ pub fn r(state: &'static str, p: &'static str, h: Box<dyn Fn(&Request) -> Respon
 /// Build the route table for the CRM API
 pub fn build_router(state: Arc<Mutex<CrmState>>) -> Vec<Route> {
     vec![
+        r("OPTIONS", "/*", options_handler()),
         r("GET", "/", handlers::static_file_route(Arc::clone(&state))),
         r("GET", "/*", handlers::static_file_route(Arc::clone(&state))),
         r("GET", "/api/_meta", handlers::meta_route(Arc::clone(&state))),
@@ -98,7 +99,23 @@ pub fn error_response(status: u16, msg: &str) -> Response {
     ]);
     let mut resp = json_response(data);
     resp.status = status;
+    resp.reason = match status {
+        400 => "Bad Request",
+        404 => "Not Found",
+        500 => "Internal Server Error",
+        _ => "Error",
+    }.into();
     resp
+}
+
+pub fn options_handler() -> Box<dyn Fn(&Request) -> Response + Send + Sync> {
+    Box::new(|_req: &Request| {
+        Response::new(204)
+            .with_header("Access-Control-Allow-Origin", "*")
+            .with_header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS")
+            .with_header("Access-Control-Allow-Headers", "Content-Type, Authorization")
+            .with_header("Access-Control-Max-Age", "86400")
+    })
 }
 
 pub fn not_found(msg: &str) -> Response {

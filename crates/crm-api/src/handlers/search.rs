@@ -1,4 +1,4 @@
-use crate::router_setup::{json_response, upper_bound, CrmState};
+use crate::router_setup::{internal_error, json_response, upper_bound, CrmState};
 use akurai_http::{Request, Response};
 use akurai_json::Value;
 use std::sync::{Arc, Mutex};
@@ -50,8 +50,14 @@ pub fn search_route(state: Arc<Mutex<CrmState>>) -> Box<dyn Fn(&Request) -> Resp
             ]));
         }
 
-        let state = state.lock().unwrap();
-        let mut db = state.db.lock().unwrap();
+        let state = match state.lock() {
+            Ok(s) => s,
+            Err(_) => return internal_error("lock poisoned"),
+        };
+        let mut db = match state.db.lock() {
+            Ok(db) => db,
+            Err(_) => return internal_error("db lock poisoned"),
+        };
         let mut results = Vec::new();
 
         let entity_prefixes = ["people:", "companies:", "opportunities:", "tasks:", "notes:"];

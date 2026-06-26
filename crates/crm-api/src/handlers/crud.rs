@@ -28,11 +28,23 @@ fn collection_name(entity: &str) -> &str {
     }
 }
 
+fn build_key(coll_name: &str, id: u64) -> Vec<u8> {
+    let mut key = format!("{}:", coll_name).into_bytes();
+    key.extend_from_slice(&id.to_be_bytes());
+    key
+}
+
 pub fn list_route(state: Arc<Mutex<CrmState>>, entity: &'static str) -> Box<dyn Fn(&Request) -> Response + Send + Sync> {
     Box::new(move |_req: &Request| {
-        let state = state.lock().unwrap();
+        let state = match state.lock() {
+            Ok(s) => s,
+            Err(_) => return internal_error("lock poisoned"),
+        };
         let coll_name = collection_name(entity);
-        let mut db = state.db.lock().unwrap();
+        let mut db = match state.db.lock() {
+            Ok(db) => db,
+            Err(_) => return internal_error("db lock poisoned"),
+        };
 
         let prefix = format!("{}:", coll_name).into_bytes();
         let end = upper_bound(&prefix);
@@ -56,11 +68,17 @@ pub fn get_route(state: Arc<Mutex<CrmState>>, entity: &'static str) -> Box<dyn F
             Some(id) => id,
             None => return bad_request("missing id"),
         };
-        let state = state.lock().unwrap();
+        let state = match state.lock() {
+            Ok(s) => s,
+            Err(_) => return internal_error("lock poisoned"),
+        };
         let coll_name = collection_name(entity);
-        let mut db = state.db.lock().unwrap();
+        let mut db = match state.db.lock() {
+            Ok(db) => db,
+            Err(_) => return internal_error("db lock poisoned"),
+        };
 
-        let key = format!("{}:{}", coll_name, id).into_bytes();
+        let key = build_key(coll_name, id);
         match db.get(&key) {
             Ok(Some(val)) => {
                 match akurai_json::parse(std::str::from_utf8(&val).unwrap_or("")) {
@@ -80,21 +98,33 @@ pub fn create_route(state: Arc<Mutex<CrmState>>, entity: &'static str) -> Box<dy
             Ok(v) => v,
             Err(e) => return bad_request(&e),
         };
-        let state = state.lock().unwrap();
+        let state = match state.lock() {
+            Ok(s) => s,
+            Err(_) => return internal_error("lock poisoned"),
+        };
         let coll_name = collection_name(entity);
-        let mut db = state.db.lock().unwrap();
+        let mut db = match state.db.lock() {
+            Ok(db) => db,
+            Err(_) => return internal_error("db lock poisoned"),
+        };
 
         let now = CrmState::now();
         let counter_key = format!("{}:_counter", coll_name).into_bytes();
         let next_id = match db.get(&counter_key) {
             Ok(Some(bytes)) => {
                 let s = String::from_utf8_lossy(&bytes).to_string();
-                s.parse::<u64>().unwrap_or(0) + 1
+                match s.parse::<u64>() {
+                    Ok(id) if id < u64::MAX => id + 1,
+                    _ => return internal_error("ID space exhausted"),
+                }
             }
             _ => 1,
         };
-        if db.insert(&counter_key, next_id.to_string().as_bytes()).is_err() {
-            return internal_error("failed to update counter");
+        if let Err(e) = db.insert(&counter_key, next_id.to_string().as_bytes()) {
+            return internal_error(&format!("counter: {e}"));
+        }
+        if let Err(e) = db.commit() {
+            return internal_error(&format!("commit: {e}"));
         }
 
         let mut obj = match body {
@@ -106,11 +136,14 @@ pub fn create_route(state: Arc<Mutex<CrmState>>, entity: &'static str) -> Box<dy
         obj.push(("updatedAt".into(), Value::Int(now)));
 
         let record = Value::Object(obj);
-        let key = format!("{}:{}", coll_name, next_id).into_bytes();
+        let key = build_key(coll_name, next_id);
         let json_str = record.to_json();
 
         match db.insert(&key, json_str.as_bytes()) {
             Ok(_) => {
+                if let Err(e) = db.commit() {
+                    return internal_error(&format!("commit: {e}"));
+                }
                 let _ = record_timeline(&mut db, coll_name, next_id, "created", None);
                 let body = record.to_json();
                 Response::new(201)
@@ -133,11 +166,17 @@ pub fn update_route(state: Arc<Mutex<CrmState>>, entity: &'static str) -> Box<dy
             Ok(v) => v,
             Err(e) => return bad_request(&e),
         };
-        let state = state.lock().unwrap();
+        let state = match state.lock() {
+            Ok(s) => s,
+            Err(_) => return internal_error("lock poisoned"),
+        };
         let coll_name = collection_name(entity);
-        let mut db = state.db.lock().unwrap();
+        let mut db = match state.db.lock() {
+            Ok(db) => db,
+            Err(_) => return internal_error("db lock poisoned"),
+        };
 
-        let key = format!("{}:{}", coll_name, id).into_bytes();
+        let key = build_key(coll_name, id);
 
         let existing = match db.get(&key) {
             Ok(Some(val)) => {
@@ -191,6 +230,9 @@ pub fn update_route(state: Arc<Mutex<CrmState>>, entity: &'static str) -> Box<dy
 
         match db.insert(&key, json_str.as_bytes()) {
             Ok(_) => {
+                if let Err(e) = db.commit() {
+                    return internal_error(&format!("commit: {e}"));
+                }
                 let _ = record_timeline(&mut db, coll_name, id, "updated", None);
                 json_response(record)
             }
@@ -205,13 +247,22 @@ pub fn delete_route(state: Arc<Mutex<CrmState>>, entity: &'static str) -> Box<dy
             Some(id) => id,
             None => return bad_request("missing id"),
         };
-        let state = state.lock().unwrap();
+        let state = match state.lock() {
+            Ok(s) => s,
+            Err(_) => return internal_error("lock poisoned"),
+        };
         let coll_name = collection_name(entity);
-        let mut db = state.db.lock().unwrap();
+        let mut db = match state.db.lock() {
+            Ok(db) => db,
+            Err(_) => return internal_error("db lock poisoned"),
+        };
 
-        let key = format!("{}:{}", coll_name, id).into_bytes();
+        let key = build_key(coll_name, id);
         match db.delete(&key) {
             Ok(true) => {
+                if let Err(e) = db.commit() {
+                    return internal_error(&format!("commit: {e}"));
+                }
                 let _ = record_timeline(&mut db, coll_name, id, "deleted", None);
                 json_response(Value::Object(vec![
                     ("deleted".into(), Value::Bool(true)),

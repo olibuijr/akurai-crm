@@ -1,11 +1,14 @@
-use crate::router_setup::{json_response, CrmState};
+use crate::router_setup::{internal_error, json_response, CrmState};
 use akurai_http::{Request, Response};
 use akurai_json::Value;
 use std::sync::{Arc, Mutex};
 
 pub fn meta_route(state: Arc<Mutex<CrmState>>) -> Box<dyn Fn(&Request) -> Response + Send + Sync> {
     Box::new(move |_req: &Request| {
-        let state = state.lock().unwrap();
+        let state = match state.lock() {
+            Ok(s) => s,
+            Err(_) => return internal_error("lock poisoned"),
+        };
         let objects: Vec<Value> = state.objects.iter().map(|obj| {
             let fields: Vec<Value> = obj.fields.iter().map(|f| {
                 Value::Object(vec![

@@ -1,11 +1,14 @@
-use crate::router_setup::{not_found, CrmState};
+use crate::router_setup::{internal_error, not_found, CrmState};
 use akurai_http::{Request, Response};
 use std::sync::{Arc, Mutex};
 
 pub fn static_file_route(state: Arc<Mutex<CrmState>>) -> Box<dyn Fn(&Request) -> Response + Send + Sync> {
     Box::new(move |req: &Request| {
         let path = &req.path;
-        let state = state.lock().unwrap();
+        let state = match state.lock() {
+            Ok(s) => s,
+            Err(_) => return internal_error("lock poisoned"),
+        };
         let frontend = &state.frontend_dir;
 
         let file_path = if path == "/" {

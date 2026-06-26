@@ -1,4 +1,4 @@
-use crate::router_setup::{json_response, upper_bound, CrmState};
+use crate::router_setup::{internal_error, json_response, upper_bound, CrmState};
 use akurai_http::{Request, Response};
 use akurai_json::Value;
 use std::sync::{Arc, Mutex};
@@ -41,8 +41,14 @@ pub fn timeline_route(state: Arc<Mutex<CrmState>>) -> Box<dyn Fn(&Request) -> Re
             ]));
         }
 
-        let state = state.lock().unwrap();
-        let mut db = state.db.lock().unwrap();
+        let state = match state.lock() {
+            Ok(s) => s,
+            Err(_) => return internal_error("lock poisoned"),
+        };
+        let mut db = match state.db.lock() {
+            Ok(db) => db,
+            Err(_) => return internal_error("db lock poisoned"),
+        };
         let mut activities = Vec::new();
 
         let prefix = format!("timeline:{}:{}:", entity_type, entity_id).into_bytes();
@@ -91,6 +97,7 @@ pub fn record_timeline(
     let json_str = record.to_json();
     db.insert(&key, json_str.as_bytes())
         .map_err(|e| format!("timeline write: {e}"))?;
+    db.commit().map_err(|e| format!("timeline commit: {e}"))?;
 
     Ok(())
 }

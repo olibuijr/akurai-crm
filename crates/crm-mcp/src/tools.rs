@@ -222,9 +222,10 @@ impl ToolRegistry {
     }
 
     fn get_record(&self, collection: &str, id: u64) -> Result<Option<Value>, String> {
-        let key = format!("{}:{}", collection, id);
+        let mut key = format!("{}:", collection).into_bytes();
+        key.extend_from_slice(&id.to_be_bytes());
         let mut db = self.db.lock().map_err(|e| format!("lock: {e}"))?;
-        match db.get(key.as_bytes()).map_err(|e| format!("storage: {e}"))? {
+        match db.get(&key).map_err(|e| format!("storage: {e}"))? {
             Some(bytes) => {
                 let s = String::from_utf8_lossy(&bytes).to_string();
                 akurai_json::parse(&s).map(Some).map_err(|e| format!("parse: {e}"))
@@ -257,12 +258,17 @@ impl ToolRegistry {
         let counter_key = "people:_counter";
         let next_id = match db.get(counter_key.as_bytes()).map_err(|e| format!("counter read: {e}"))? {
             Some(bytes) => {
-                String::from_utf8_lossy(&bytes).parse::<u64>().unwrap_or(0) + 1
+                let s = String::from_utf8_lossy(&bytes).to_string();
+                match s.parse::<u64>() {
+                    Ok(id) if id < u64::MAX => id + 1,
+                    _ => return Err("ID space exhausted".into()),
+                }
             }
             _ => 1,
         };
         db.insert(counter_key.as_bytes(), next_id.to_string().as_bytes())
             .map_err(|e| format!("counter write: {e}"))?;
+        db.commit().map_err(|e| format!("commit: {e}"))?;
 
         let first = Self::get_arg(args, "firstName").and_then(|v| v.as_str()).unwrap_or("");
         let last = Self::get_arg(args, "lastName").and_then(|v| v.as_str()).unwrap_or("");
@@ -287,9 +293,11 @@ impl ToolRegistry {
         }
 
         let record = Value::Object(fields);
-        let key = format!("people:{}", next_id);
-        db.insert(key.as_bytes(), record.to_json().as_bytes())
+        let mut key = Vec::from(b"people:" as &[u8]);
+        key.extend_from_slice(&next_id.to_be_bytes());
+        db.insert(&key, record.to_json().as_bytes())
             .map_err(|e| format!("insert: {e}"))?;
+        db.commit().map_err(|e| format!("commit: {e}"))?;
 
         Ok(record)
     }
