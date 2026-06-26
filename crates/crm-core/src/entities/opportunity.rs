@@ -46,12 +46,24 @@ impl Opportunity {
         use akurai_json::Value;
         let pairs = match val {
             Value::Object(p) => p,
-            _ => return Err(crate::CoreError::InvalidEntity("expected object for Opportunity".into())),
+            _ => {
+                return Err(crate::CoreError::InvalidEntity(
+                    "expected object for Opportunity".into(),
+                ))
+            }
         };
         let mut o = Opportunity {
-            id, name: String::new(), amount: None, stage: PipelineStage::New,
-            close_date: None, probability: None, person_id: None, company_id: None,
-            created_at: 0, updated_at: 0, created_by: None,
+            id,
+            name: String::new(),
+            amount: None,
+            stage: PipelineStage::New,
+            close_date: None,
+            probability: None,
+            person_id: None,
+            company_id: None,
+            created_at: 0,
+            updated_at: 0,
+            created_by: None,
         };
         for (k, v) in pairs {
             match k.as_str() {
@@ -79,7 +91,9 @@ impl Opportunity {
             }
         }
         if o.name.is_empty() {
-            return Err(crate::CoreError::Validation("opportunity name is required".into()));
+            return Err(crate::CoreError::Validation(
+                "opportunity name is required".into(),
+            ));
         }
         Ok(o)
     }

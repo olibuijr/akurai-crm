@@ -3,7 +3,7 @@
     "title": "AkurAI-CRM",
     "description": "Pure Rust CRM built on AkurAI-Framework",
     "url": "https://akurai-crm.olibuijr.com",
-    "version": "v0.1.0"
+    "version": "v0.1.1"
   },
   "brand": {
     "name": "AkurAI-CRM",

@@ -3,7 +3,9 @@ use akurai_http::{Request, Response};
 use akurai_json::Value;
 use std::sync::{Arc, Mutex};
 
-pub fn timeline_route(state: Arc<Mutex<CrmState>>) -> Box<dyn Fn(&Request) -> Response + Send + Sync> {
+pub fn timeline_route(
+    state: Arc<Mutex<CrmState>>,
+) -> Box<dyn Fn(&Request) -> Response + Send + Sync> {
     Box::new(move |req: &Request| {
         let query = req.query.as_deref().unwrap_or("");
         let mut entity_type = String::new();
@@ -30,15 +32,18 @@ pub fn timeline_route(state: Arc<Mutex<CrmState>>) -> Box<dyn Fn(&Request) -> Re
             let mut parts = pair.splitn(2, '=');
             match parts.next() {
                 Some("entityType") => entity_type = url_decode(parts.next().unwrap_or("")),
-                Some("entityId") => entity_id = parts.next().and_then(|s| s.parse().ok()).unwrap_or(0),
+                Some("entityId") => {
+                    entity_id = parts.next().and_then(|s| s.parse().ok()).unwrap_or(0)
+                }
                 _ => {}
             }
         }
 
         if entity_type.is_empty() || entity_id == 0 {
-            return json_response(Value::Object(vec![
-                ("timeline".into(), Value::Array(vec![])),
-            ]));
+            return json_response(Value::Object(vec![(
+                "timeline".into(),
+                Value::Array(vec![]),
+            )]));
         }
 
         let state = match state.lock() {
@@ -55,7 +60,8 @@ pub fn timeline_route(state: Arc<Mutex<CrmState>>) -> Box<dyn Fn(&Request) -> Re
         let end = upper_bound(&prefix);
         if let Ok(entries) = db.range(&prefix, &end) {
             for (_key_bytes, val_bytes) in entries {
-                if let Ok(json) = akurai_json::parse(std::str::from_utf8(&val_bytes).unwrap_or("")) {
+                if let Ok(json) = akurai_json::parse(std::str::from_utf8(&val_bytes).unwrap_or(""))
+                {
                     activities.push(json);
                 }
             }
@@ -79,12 +85,19 @@ pub fn record_timeline(
     actor_id: Option<u64>,
 ) -> Result<(), String> {
     use std::time::{SystemTime, UNIX_EPOCH};
-    let now = SystemTime::now().duration_since(UNIX_EPOCH).unwrap_or_default().as_secs() as i64;
+    let now = SystemTime::now()
+        .duration_since(UNIX_EPOCH)
+        .unwrap_or_default()
+        .as_secs() as i64;
 
     use std::collections::hash_map::RandomState;
     use std::hash::{BuildHasher, Hasher};
     let rand_suffix = RandomState::new().build_hasher().finish() % 10000;
-    let key = format!("timeline:{}:{}:{}_{}", entity_type, entity_id, now, rand_suffix).into_bytes();
+    let key = format!(
+        "timeline:{}:{}:{}_{}",
+        entity_type, entity_id, now, rand_suffix
+    )
+    .into_bytes();
 
     let record = Value::Object(vec![
         ("action".into(), Value::Str(action.into())),

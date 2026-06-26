@@ -32,12 +32,23 @@ impl CrmState {
 
     pub fn now() -> i64 {
         use std::time::{SystemTime, UNIX_EPOCH};
-        SystemTime::now().duration_since(UNIX_EPOCH).unwrap_or_default().as_secs() as i64
+        SystemTime::now()
+            .duration_since(UNIX_EPOCH)
+            .unwrap_or_default()
+            .as_secs() as i64
     }
 }
 
-pub fn r(state: &'static str, p: &'static str, h: Box<dyn Fn(&Request) -> Response + Send + Sync>) -> Route {
-    Route { method: state, pattern: p, handler: h }
+pub fn r(
+    state: &'static str,
+    p: &'static str,
+    h: Box<dyn Fn(&Request) -> Response + Send + Sync>,
+) -> Route {
+    Route {
+        method: state,
+        pattern: p,
+        handler: h,
+    }
 }
 
 /// Build the route table for the CRM API
@@ -46,34 +57,146 @@ pub fn build_router(state: Arc<Mutex<CrmState>>) -> Vec<Route> {
         r("OPTIONS", "/*", options_handler()),
         r("GET", "/", handlers::static_file_route(Arc::clone(&state))),
         r("GET", "/*", handlers::static_file_route(Arc::clone(&state))),
-        r("GET", "/api/_meta", handlers::meta_route(Arc::clone(&state))),
-        r("GET", "/api/people", handlers::list_route(Arc::clone(&state), "people")),
-        r("GET", "/api/people/:id", handlers::get_route(Arc::clone(&state), "people")),
-        r("POST", "/api/people", handlers::create_route(Arc::clone(&state), "people")),
-        r("PUT", "/api/people/:id", handlers::update_route(Arc::clone(&state), "people")),
-        r("DELETE", "/api/people/:id", handlers::delete_route(Arc::clone(&state), "people")),
-        r("GET", "/api/companies", handlers::list_route(Arc::clone(&state), "companies")),
-        r("GET", "/api/companies/:id", handlers::get_route(Arc::clone(&state), "companies")),
-        r("POST", "/api/companies", handlers::create_route(Arc::clone(&state), "companies")),
-        r("PUT", "/api/companies/:id", handlers::update_route(Arc::clone(&state), "companies")),
-        r("DELETE", "/api/companies/:id", handlers::delete_route(Arc::clone(&state), "companies")),
-        r("GET", "/api/opportunities", handlers::list_route(Arc::clone(&state), "opportunities")),
-        r("GET", "/api/opportunities/:id", handlers::get_route(Arc::clone(&state), "opportunities")),
-        r("POST", "/api/opportunities", handlers::create_route(Arc::clone(&state), "opportunities")),
-        r("PUT", "/api/opportunities/:id", handlers::update_route(Arc::clone(&state), "opportunities")),
-        r("DELETE", "/api/opportunities/:id", handlers::delete_route(Arc::clone(&state), "opportunities")),
-        r("GET", "/api/tasks", handlers::list_route(Arc::clone(&state), "tasks")),
-        r("GET", "/api/tasks/:id", handlers::get_route(Arc::clone(&state), "tasks")),
-        r("POST", "/api/tasks", handlers::create_route(Arc::clone(&state), "tasks")),
-        r("PUT", "/api/tasks/:id", handlers::update_route(Arc::clone(&state), "tasks")),
-        r("DELETE", "/api/tasks/:id", handlers::delete_route(Arc::clone(&state), "tasks")),
-        r("GET", "/api/notes", handlers::list_route(Arc::clone(&state), "notes")),
-        r("GET", "/api/notes/:id", handlers::get_route(Arc::clone(&state), "notes")),
-        r("POST", "/api/notes", handlers::create_route(Arc::clone(&state), "notes")),
-        r("PUT", "/api/notes/:id", handlers::update_route(Arc::clone(&state), "notes")),
-        r("DELETE", "/api/notes/:id", handlers::delete_route(Arc::clone(&state), "notes")),
-        r("GET", "/api/search", handlers::search_route(Arc::clone(&state))),
-        r("GET", "/api/timeline", handlers::timeline_route(Arc::clone(&state))),
+        r(
+            "GET",
+            "/api/_meta",
+            handlers::meta_route(Arc::clone(&state)),
+        ),
+        r(
+            "GET",
+            "/api/people",
+            handlers::list_route(Arc::clone(&state), "people"),
+        ),
+        r(
+            "GET",
+            "/api/people/:id",
+            handlers::get_route(Arc::clone(&state), "people"),
+        ),
+        r(
+            "POST",
+            "/api/people",
+            handlers::create_route(Arc::clone(&state), "people"),
+        ),
+        r(
+            "PUT",
+            "/api/people/:id",
+            handlers::update_route(Arc::clone(&state), "people"),
+        ),
+        r(
+            "DELETE",
+            "/api/people/:id",
+            handlers::delete_route(Arc::clone(&state), "people"),
+        ),
+        r(
+            "GET",
+            "/api/companies",
+            handlers::list_route(Arc::clone(&state), "companies"),
+        ),
+        r(
+            "GET",
+            "/api/companies/:id",
+            handlers::get_route(Arc::clone(&state), "companies"),
+        ),
+        r(
+            "POST",
+            "/api/companies",
+            handlers::create_route(Arc::clone(&state), "companies"),
+        ),
+        r(
+            "PUT",
+            "/api/companies/:id",
+            handlers::update_route(Arc::clone(&state), "companies"),
+        ),
+        r(
+            "DELETE",
+            "/api/companies/:id",
+            handlers::delete_route(Arc::clone(&state), "companies"),
+        ),
+        r(
+            "GET",
+            "/api/opportunities",
+            handlers::list_route(Arc::clone(&state), "opportunities"),
+        ),
+        r(
+            "GET",
+            "/api/opportunities/:id",
+            handlers::get_route(Arc::clone(&state), "opportunities"),
+        ),
+        r(
+            "POST",
+            "/api/opportunities",
+            handlers::create_route(Arc::clone(&state), "opportunities"),
+        ),
+        r(
+            "PUT",
+            "/api/opportunities/:id",
+            handlers::update_route(Arc::clone(&state), "opportunities"),
+        ),
+        r(
+            "DELETE",
+            "/api/opportunities/:id",
+            handlers::delete_route(Arc::clone(&state), "opportunities"),
+        ),
+        r(
+            "GET",
+            "/api/tasks",
+            handlers::list_route(Arc::clone(&state), "tasks"),
+        ),
+        r(
+            "GET",
+            "/api/tasks/:id",
+            handlers::get_route(Arc::clone(&state), "tasks"),
+        ),
+        r(
+            "POST",
+            "/api/tasks",
+            handlers::create_route(Arc::clone(&state), "tasks"),
+        ),
+        r(
+            "PUT",
+            "/api/tasks/:id",
+            handlers::update_route(Arc::clone(&state), "tasks"),
+        ),
+        r(
+            "DELETE",
+            "/api/tasks/:id",
+            handlers::delete_route(Arc::clone(&state), "tasks"),
+        ),
+        r(
+            "GET",
+            "/api/notes",
+            handlers::list_route(Arc::clone(&state), "notes"),
+        ),
+        r(
+            "GET",
+            "/api/notes/:id",
+            handlers::get_route(Arc::clone(&state), "notes"),
+        ),
+        r(
+            "POST",
+            "/api/notes",
+            handlers::create_route(Arc::clone(&state), "notes"),
+        ),
+        r(
+            "PUT",
+            "/api/notes/:id",
+            handlers::update_route(Arc::clone(&state), "notes"),
+        ),
+        r(
+            "DELETE",
+            "/api/notes/:id",
+            handlers::delete_route(Arc::clone(&state), "notes"),
+        ),
+        r(
+            "GET",
+            "/api/search",
+            handlers::search_route(Arc::clone(&state)),
+        ),
+        r(
+            "GET",
+            "/api/timeline",
+            handlers::timeline_route(Arc::clone(&state)),
+        ),
     ]
 }
 
@@ -94,9 +217,8 @@ pub fn json_response(data: akurai_json::Value) -> Response {
 }
 
 pub fn error_response(status: u16, msg: &str) -> Response {
-    let data = akurai_json::Value::Object(vec![
-        ("error".into(), akurai_json::Value::Str(msg.into())),
-    ]);
+    let data =
+        akurai_json::Value::Object(vec![("error".into(), akurai_json::Value::Str(msg.into()))]);
     let mut resp = json_response(data);
     resp.status = status;
     resp.reason = match status {
@@ -104,7 +226,8 @@ pub fn error_response(status: u16, msg: &str) -> Response {
         404 => "Not Found",
         500 => "Internal Server Error",
         _ => "Error",
-    }.into();
+    }
+    .into();
     resp
 }
 
@@ -112,8 +235,14 @@ pub fn options_handler() -> Box<dyn Fn(&Request) -> Response + Send + Sync> {
     Box::new(|_req: &Request| {
         Response::new(204)
             .with_header("Access-Control-Allow-Origin", "*")
-            .with_header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS")
-            .with_header("Access-Control-Allow-Headers", "Content-Type, Authorization")
+            .with_header(
+                "Access-Control-Allow-Methods",
+                "GET, POST, PUT, DELETE, OPTIONS",
+            )
+            .with_header(
+                "Access-Control-Allow-Headers",
+                "Content-Type, Authorization",
+            )
             .with_header("Access-Control-Max-Age", "86400")
     })
 }

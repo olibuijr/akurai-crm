@@ -1,7 +1,6 @@
-use crm_api::CrmState;
 use akurai_json::Value;
+use crm_api::CrmState;
 use std::path::PathBuf;
-
 
 #[test]
 fn test_create_and_list_people() {
@@ -12,7 +11,9 @@ fn test_create_and_list_people() {
     let mut db = state.db.lock().unwrap();
 
     let now = std::time::SystemTime::now()
-        .duration_since(std::time::UNIX_EPOCH).unwrap_or_default().as_secs() as i64;
+        .duration_since(std::time::UNIX_EPOCH)
+        .unwrap_or_default()
+        .as_secs() as i64;
 
     let record = Value::Object(vec![
         ("id".into(), Value::Int(1)),
@@ -33,7 +34,9 @@ fn test_create_and_list_people() {
     let mut found = false;
     if let Ok(entries) = db.range(b"people:", b"people:\xff") {
         for (key, _) in entries {
-            if key == b"people:1" { found = true; }
+            if key == b"people:1" {
+                found = true;
+            }
         }
     }
     assert!(found, "should find the person in range scan");

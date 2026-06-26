@@ -50,7 +50,13 @@ if [ -f CHANGELOG.md ]; then
   ' CHANGELOG.md > CHANGELOG.md.tmp && mv CHANGELOG.md.tmp CHANGELOG.md
 fi
 
-# ── 4. Commit, tag, push ───────────────────────────────────────────────────
+# ── 4. Static musl build ────────────────────────────────────────────────────
+say "Build: static musl binary"
+rustup target add x86_64-unknown-linux-musl >/dev/null 2>&1 || true
+cargo build --release --target x86_64-unknown-linux-musl -p akurai-crm \
+  || die "musl build failed"
+
+# ── 5. Commit, tag, push ───────────────────────────────────────────────────
 say "Git: commit + tag v$NEW"
 git add -A
 git commit -q -m "release: v$NEW"

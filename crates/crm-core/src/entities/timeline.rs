@@ -17,7 +17,10 @@ impl TimelineActivity {
         use akurai_json::Value;
         let mut fields = vec![
             ("id".into(), Value::Int(self.id as i64)),
-            ("entityType".into(), Value::Str(self.entity_type.singular().into())),
+            (
+                "entityType".into(),
+                Value::Str(self.entity_type.singular().into()),
+            ),
             ("entityId".into(), Value::Int(self.entity_id as i64)),
             ("action".into(), Value::Str(self.action.clone())),
         ];

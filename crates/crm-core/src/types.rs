@@ -1,5 +1,3 @@
-
-
 /// Unique record identifier (auto-increment u64, stored as big-endian in B+tree)
 pub type RecordId = u64;
 
@@ -18,7 +16,10 @@ pub struct FullName {
 
 impl FullName {
     pub fn new(first: &str, last: &str) -> Self {
-        Self { first: first.into(), last: last.into() }
+        Self {
+            first: first.into(),
+            last: last.into(),
+        }
     }
     pub fn display(&self) -> String {
         format!("{} {}", self.first, self.last)
@@ -70,7 +71,15 @@ pub enum PipelineStage {
 
 impl PipelineStage {
     pub fn all() -> &'static [Self] {
-        &[Self::New, Self::Screening, Self::Meeting, Self::Proposal, Self::Negotiation, Self::Won, Self::Lost]
+        &[
+            Self::New,
+            Self::Screening,
+            Self::Meeting,
+            Self::Proposal,
+            Self::Negotiation,
+            Self::Won,
+            Self::Lost,
+        ]
     }
     pub fn label(&self) -> &str {
         match self {

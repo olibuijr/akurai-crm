@@ -50,7 +50,9 @@ fn parse_serve(args: &[String]) -> Result<cmd_serve::Config, String> {
     let mut i = 0;
     while i < args.len() {
         match args[i].as_str() {
-            "--host" => { host = next(args, &mut i, "--host")?; }
+            "--host" => {
+                host = next(args, &mut i, "--host")?;
+            }
             "--port" | "-p" => {
                 port = next(args, &mut i, "--port")?
                     .parse()
@@ -66,7 +68,12 @@ fn parse_serve(args: &[String]) -> Result<cmd_serve::Config, String> {
         }
         i += 1;
     }
-    Ok(cmd_serve::Config { host, port, dir, db })
+    Ok(cmd_serve::Config {
+        host,
+        port,
+        dir,
+        db,
+    })
 }
 
 fn next(args: &[String], i: &mut usize, flag: &str) -> Result<String, String> {

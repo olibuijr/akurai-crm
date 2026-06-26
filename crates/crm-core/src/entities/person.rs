@@ -52,7 +52,11 @@ impl Person {
         use akurai_json::Value;
         let pairs = match val {
             Value::Object(p) => p,
-            _ => return Err(crate::CoreError::InvalidEntity("expected object for Person".into())),
+            _ => {
+                return Err(crate::CoreError::InvalidEntity(
+                    "expected object for Person".into(),
+                ))
+            }
         };
         let mut p = Person {
             id,
@@ -71,8 +75,18 @@ impl Person {
             match k.as_str() {
                 "firstName" => p.name.first = v.as_str().unwrap_or("").to_string(),
                 "lastName" => p.name.last = v.as_str().unwrap_or("").to_string(),
-                "email" => p.email = Some(Email { address: v.as_str().unwrap_or("").to_string(), label: "work".into() }),
-                "phone" => p.phone = Some(Phone { number: v.as_str().unwrap_or("").to_string(), label: "mobile".into() }),
+                "email" => {
+                    p.email = Some(Email {
+                        address: v.as_str().unwrap_or("").to_string(),
+                        label: "work".into(),
+                    })
+                }
+                "phone" => {
+                    p.phone = Some(Phone {
+                        number: v.as_str().unwrap_or("").to_string(),
+                        label: "mobile".into(),
+                    })
+                }
                 "jobTitle" => p.job_title = Some(v.as_str().unwrap_or("").to_string()),
                 "companyId" => p.company_id = v.as_i64().map(|n| n as u64),
                 "linkedinUrl" => p.linkedin_url = Some(v.as_str().unwrap_or("").to_string()),

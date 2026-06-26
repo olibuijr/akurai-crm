@@ -25,7 +25,10 @@ impl Company {
             fields.push(("domainName".into(), Value::Str(d.clone())));
         }
         if let Some(ref a) = self.address {
-            fields.push(("address".into(), Value::Str(format!("{}, {}, {} {}", a.street, a.city, a.state, a.zip))));
+            fields.push((
+                "address".into(),
+                Value::Str(format!("{}, {}, {} {}", a.street, a.city, a.state, a.zip)),
+            ));
         }
         if let Some(r) = self.annual_revenue {
             fields.push(("annualRevenue".into(), Value::Int(r)));
@@ -48,12 +51,24 @@ impl Company {
         use akurai_json::Value;
         let pairs = match val {
             Value::Object(p) => p,
-            _ => return Err(crate::CoreError::InvalidEntity("expected object for Company".into())),
+            _ => {
+                return Err(crate::CoreError::InvalidEntity(
+                    "expected object for Company".into(),
+                ))
+            }
         };
         let mut c = Company {
-            id, name: String::new(), domain_name: None, address: None,
-            annual_revenue: None, employee_count: None, linkedin_url: None,
-            website_url: None, created_at: 0, updated_at: 0, created_by: None,
+            id,
+            name: String::new(),
+            domain_name: None,
+            address: None,
+            annual_revenue: None,
+            employee_count: None,
+            linkedin_url: None,
+            website_url: None,
+            created_at: 0,
+            updated_at: 0,
+            created_by: None,
         };
         for (k, v) in pairs {
             match k.as_str() {
@@ -69,7 +84,9 @@ impl Company {
             }
         }
         if c.name.is_empty() {
-            return Err(crate::CoreError::Validation("company name is required".into()));
+            return Err(crate::CoreError::Validation(
+                "company name is required".into(),
+            ));
         }
         Ok(c)
     }

@@ -16,7 +16,8 @@ pub struct McpServer {
 
 impl McpServer {
     pub fn new(config: McpConfig) -> Result<Self, String> {
-        let btree = BTree::open(&config.db_path).map_err(|e| format!("failed to open MCP database: {e}"))?;
+        let btree = BTree::open(&config.db_path)
+            .map_err(|e| format!("failed to open MCP database: {e}"))?;
         let tools = ToolRegistry::new(Arc::new(Mutex::new(btree)));
         Ok(Self {
             config,
@@ -53,6 +54,8 @@ impl McpServer {
 
         let server = akurai_http::Server::bind(&addr)
             .map_err(|e| format!("failed to bind MCP server: {e}"))?;
-        server.run(handler).map_err(|e| format!("server error: {e}"))
+        server
+            .run(handler)
+            .map_err(|e| format!("server error: {e}"))
     }
 }

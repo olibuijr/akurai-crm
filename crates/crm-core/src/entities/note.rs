@@ -34,11 +34,22 @@ impl Note {
         use akurai_json::Value;
         let pairs = match val {
             Value::Object(p) => p,
-            _ => return Err(crate::CoreError::InvalidEntity("expected object for Note".into())),
+            _ => {
+                return Err(crate::CoreError::InvalidEntity(
+                    "expected object for Note".into(),
+                ))
+            }
         };
         let mut n = Note {
-            id, title: None, body: String::new(), person_ids: vec![], company_ids: vec![],
-            opportunity_ids: vec![], created_at: 0, updated_at: 0, created_by: None,
+            id,
+            title: None,
+            body: String::new(),
+            person_ids: vec![],
+            company_ids: vec![],
+            opportunity_ids: vec![],
+            created_at: 0,
+            updated_at: 0,
+            created_by: None,
         };
         for (k, v) in pairs {
             match k.as_str() {
@@ -49,17 +60,26 @@ impl Note {
                 _ => {
                     if k == "personIds" {
                         if let Value::Array(arr) = v {
-                            n.person_ids = arr.iter().filter_map(|x| x.as_i64().map(|n| n as u64)).collect();
+                            n.person_ids = arr
+                                .iter()
+                                .filter_map(|x| x.as_i64().map(|n| n as u64))
+                                .collect();
                         }
                     }
                     if k == "companyIds" {
                         if let Value::Array(arr) = v {
-                            n.company_ids = arr.iter().filter_map(|x| x.as_i64().map(|n| n as u64)).collect();
+                            n.company_ids = arr
+                                .iter()
+                                .filter_map(|x| x.as_i64().map(|n| n as u64))
+                                .collect();
                         }
                     }
                     if k == "opportunityIds" {
                         if let Value::Array(arr) = v {
-                            n.opportunity_ids = arr.iter().filter_map(|x| x.as_i64().map(|n| n as u64)).collect();
+                            n.opportunity_ids = arr
+                                .iter()
+                                .filter_map(|x| x.as_i64().map(|n| n as u64))
+                                .collect();
                         }
                     }
                 }

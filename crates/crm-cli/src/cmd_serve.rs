@@ -12,8 +12,7 @@ pub struct Config {
 }
 
 pub fn run(cfg: Config) -> io::Result<()> {
-    let state = CrmState::new(&cfg.db, cfg.dir.clone())
-        .map_err(io::Error::other)?;
+    let state = CrmState::new(&cfg.db, cfg.dir.clone()).map_err(io::Error::other)?;
     let state = Arc::new(Mutex::new(state));
 
     let routes = build_router(state);

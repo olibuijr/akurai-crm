@@ -7,9 +7,9 @@ pub struct Task {
     pub description: Option<String>, // rich text / markdown
     pub status: TaskStatus,
     pub due_at: Option<Timestamp>,
-    pub assignee_id: Option<RecordId>, // person or user
-    pub person_ids: Vec<RecordId>,   // linked people
-    pub company_ids: Vec<RecordId>,  // linked companies
+    pub assignee_id: Option<RecordId>,  // person or user
+    pub person_ids: Vec<RecordId>,      // linked people
+    pub company_ids: Vec<RecordId>,     // linked companies
     pub opportunity_ids: Vec<RecordId>, // linked opps
     pub created_at: Timestamp,
     pub updated_at: Timestamp,
@@ -44,12 +44,25 @@ impl Task {
         use akurai_json::Value;
         let pairs = match val {
             Value::Object(p) => p,
-            _ => return Err(crate::CoreError::InvalidEntity("expected object for Task".into())),
+            _ => {
+                return Err(crate::CoreError::InvalidEntity(
+                    "expected object for Task".into(),
+                ))
+            }
         };
         let mut t = Task {
-            id, title: String::new(), description: None, status: TaskStatus::Todo,
-            due_at: None, assignee_id: None, person_ids: vec![], company_ids: vec![],
-            opportunity_ids: vec![], created_at: 0, updated_at: 0, created_by: None,
+            id,
+            title: String::new(),
+            description: None,
+            status: TaskStatus::Todo,
+            due_at: None,
+            assignee_id: None,
+            person_ids: vec![],
+            company_ids: vec![],
+            opportunity_ids: vec![],
+            created_at: 0,
+            updated_at: 0,
+            created_by: None,
         };
         for (k, v) in pairs {
             match k.as_str() {
@@ -71,24 +84,35 @@ impl Task {
                 _ => {
                     if k == "personIds" {
                         if let Value::Array(arr) = v {
-                            t.person_ids = arr.iter().filter_map(|x| x.as_i64().map(|n| n as u64)).collect();
+                            t.person_ids = arr
+                                .iter()
+                                .filter_map(|x| x.as_i64().map(|n| n as u64))
+                                .collect();
                         }
                     }
                     if k == "companyIds" {
                         if let Value::Array(arr) = v {
-                            t.company_ids = arr.iter().filter_map(|x| x.as_i64().map(|n| n as u64)).collect();
+                            t.company_ids = arr
+                                .iter()
+                                .filter_map(|x| x.as_i64().map(|n| n as u64))
+                                .collect();
                         }
                     }
                     if k == "opportunityIds" {
                         if let Value::Array(arr) = v {
-                            t.opportunity_ids = arr.iter().filter_map(|x| x.as_i64().map(|n| n as u64)).collect();
+                            t.opportunity_ids = arr
+                                .iter()
+                                .filter_map(|x| x.as_i64().map(|n| n as u64))
+                                .collect();
                         }
                     }
                 }
             }
         }
         if t.title.is_empty() {
-            return Err(crate::CoreError::Validation("task title is required".into()));
+            return Err(crate::CoreError::Validation(
+                "task title is required".into(),
+            ));
         }
         Ok(t)
     }

@@ -12,7 +12,7 @@ dependencies = [
 
 [[package]]
 name = "akurai-crm"
-version = "0.1.0"
+version = "0.1.1"
 dependencies = [
  "akurai-collections",
  "akurai-http",
@@ -48,7 +48,7 @@ version = "0.8.0"
 
 [[package]]
 name = "crm-api"
-version = "0.1.0"
+version = "0.1.1"
 dependencies = [
  "akurai-collections",
  "akurai-http",
@@ -60,7 +60,7 @@ dependencies = [
 
 [[package]]
 name = "crm-core"
-version = "0.1.0"
+version = "0.1.1"
 dependencies = [
  "akurai-json",
  "akurai-schema",
@@ -68,7 +68,7 @@ dependencies = [
 
 [[package]]
 name = "crm-mcp"
-version = "0.1.0"
+version = "0.1.1"
 dependencies = [
  "akurai-http",
  "akurai-json",

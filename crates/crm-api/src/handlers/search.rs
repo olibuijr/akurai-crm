@@ -23,16 +23,21 @@ fn url_decode(s: &str) -> String {
 fn json_values_contain(val: &akurai_json::Value, term: &str) -> bool {
     match val {
         akurai_json::Value::Str(s) => s.to_lowercase().contains(term),
-        akurai_json::Value::Object(pairs) => pairs.iter().any(|(_, v)| json_values_contain(v, term)),
+        akurai_json::Value::Object(pairs) => {
+            pairs.iter().any(|(_, v)| json_values_contain(v, term))
+        }
         akurai_json::Value::Array(items) => items.iter().any(|v| json_values_contain(v, term)),
         _ => false,
     }
 }
 
-pub fn search_route(state: Arc<Mutex<CrmState>>) -> Box<dyn Fn(&Request) -> Response + Send + Sync> {
+pub fn search_route(
+    state: Arc<Mutex<CrmState>>,
+) -> Box<dyn Fn(&Request) -> Response + Send + Sync> {
     Box::new(move |req: &Request| {
         let query = req.query.as_deref().unwrap_or("");
-        let search_term = query.split('&')
+        let search_term = query
+            .split('&')
             .find_map(|pair| {
                 let mut parts = pair.splitn(2, '=');
                 if parts.next()? == "q" {
@@ -60,16 +65,27 @@ pub fn search_route(state: Arc<Mutex<CrmState>>) -> Box<dyn Fn(&Request) -> Resp
         };
         let mut results = Vec::new();
 
-        let entity_prefixes = ["people:", "companies:", "opportunities:", "tasks:", "notes:"];
+        let entity_prefixes = [
+            "people:",
+            "companies:",
+            "opportunities:",
+            "tasks:",
+            "notes:",
+        ];
         for prefix_str in &entity_prefixes {
             let prefix = prefix_str.as_bytes();
             let end = upper_bound(prefix);
             if let Ok(entries) = db.range(prefix, &end) {
                 for (_key_bytes, val_bytes) in entries {
-                    if let Ok(json) = akurai_json::parse(std::str::from_utf8(&val_bytes).unwrap_or("")) {
+                    if let Ok(json) =
+                        akurai_json::parse(std::str::from_utf8(&val_bytes).unwrap_or(""))
+                    {
                         if json_values_contain(&json, &search_term) {
                             let entry = vec![
-                                ("entity".into(), Value::Str(prefix_str.trim_end_matches(':').into())),
+                                (
+                                    "entity".into(),
+                                    Value::Str(prefix_str.trim_end_matches(':').into()),
+                                ),
                                 ("record".into(), json),
                             ];
                             results.push(Value::Object(entry));

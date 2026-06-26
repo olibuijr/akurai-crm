@@ -1,5 +1,7 @@
 use crate::handlers::timeline::record_timeline;
-use crate::router_setup::{bad_request, internal_error, json_response, not_found, upper_bound, CrmState};
+use crate::router_setup::{
+    bad_request, internal_error, json_response, not_found, upper_bound, CrmState,
+};
 use akurai_http::{Request, Response};
 use akurai_json::Value;
 use std::sync::{Arc, Mutex};
@@ -34,7 +36,10 @@ fn build_key(coll_name: &str, id: u64) -> Vec<u8> {
     key
 }
 
-pub fn list_route(state: Arc<Mutex<CrmState>>, entity: &'static str) -> Box<dyn Fn(&Request) -> Response + Send + Sync> {
+pub fn list_route(
+    state: Arc<Mutex<CrmState>>,
+    entity: &'static str,
+) -> Box<dyn Fn(&Request) -> Response + Send + Sync> {
     Box::new(move |_req: &Request| {
         let state = match state.lock() {
             Ok(s) => s,
@@ -52,7 +57,8 @@ pub fn list_route(state: Arc<Mutex<CrmState>>, entity: &'static str) -> Box<dyn 
 
         if let Ok(entries) = db.range(&prefix, &end) {
             for (_key_bytes, val_bytes) in entries {
-                if let Ok(json) = akurai_json::parse(std::str::from_utf8(&val_bytes).unwrap_or("")) {
+                if let Ok(json) = akurai_json::parse(std::str::from_utf8(&val_bytes).unwrap_or(""))
+                {
                     records.push(json);
                 }
             }
@@ -62,7 +68,10 @@ pub fn list_route(state: Arc<Mutex<CrmState>>, entity: &'static str) -> Box<dyn 
     })
 }
 
-pub fn get_route(state: Arc<Mutex<CrmState>>, entity: &'static str) -> Box<dyn Fn(&Request) -> Response + Send + Sync> {
+pub fn get_route(
+    state: Arc<Mutex<CrmState>>,
+    entity: &'static str,
+) -> Box<dyn Fn(&Request) -> Response + Send + Sync> {
     Box::new(move |req: &Request| {
         let id = match extract_id(&req.path) {
             Some(id) => id,
@@ -80,19 +89,20 @@ pub fn get_route(state: Arc<Mutex<CrmState>>, entity: &'static str) -> Box<dyn F
 
         let key = build_key(coll_name, id);
         match db.get(&key) {
-            Ok(Some(val)) => {
-                match akurai_json::parse(std::str::from_utf8(&val).unwrap_or("")) {
-                    Ok(json) => json_response(json),
-                    Err(_) => internal_error("corrupted data"),
-                }
-            }
+            Ok(Some(val)) => match akurai_json::parse(std::str::from_utf8(&val).unwrap_or("")) {
+                Ok(json) => json_response(json),
+                Err(_) => internal_error("corrupted data"),
+            },
             Ok(None) => not_found(&format!("{entity}/{id}")),
             Err(e) => internal_error(&format!("storage: {e}")),
         }
     })
 }
 
-pub fn create_route(state: Arc<Mutex<CrmState>>, entity: &'static str) -> Box<dyn Fn(&Request) -> Response + Send + Sync> {
+pub fn create_route(
+    state: Arc<Mutex<CrmState>>,
+    entity: &'static str,
+) -> Box<dyn Fn(&Request) -> Response + Send + Sync> {
     Box::new(move |req: &Request| {
         let body = match parse_body(req) {
             Ok(v) => v,
@@ -156,7 +166,10 @@ pub fn create_route(state: Arc<Mutex<CrmState>>, entity: &'static str) -> Box<dy
     })
 }
 
-pub fn update_route(state: Arc<Mutex<CrmState>>, entity: &'static str) -> Box<dyn Fn(&Request) -> Response + Send + Sync> {
+pub fn update_route(
+    state: Arc<Mutex<CrmState>>,
+    entity: &'static str,
+) -> Box<dyn Fn(&Request) -> Response + Send + Sync> {
     Box::new(move |req: &Request| {
         let id = match extract_id(&req.path) {
             Some(id) => id,
@@ -179,12 +192,10 @@ pub fn update_route(state: Arc<Mutex<CrmState>>, entity: &'static str) -> Box<dy
         let key = build_key(coll_name, id);
 
         let existing = match db.get(&key) {
-            Ok(Some(val)) => {
-                match akurai_json::parse(std::str::from_utf8(&val).unwrap_or("")) {
-                    Ok(v) => v,
-                    Err(_) => return internal_error("corrupted data"),
-                }
-            }
+            Ok(Some(val)) => match akurai_json::parse(std::str::from_utf8(&val).unwrap_or("")) {
+                Ok(v) => v,
+                Err(_) => return internal_error("corrupted data"),
+            },
             Ok(None) => return not_found(&format!("{entity}/{id}")),
             Err(e) => return internal_error(&format!("storage: {e}")),
         };
@@ -241,7 +252,10 @@ pub fn update_route(state: Arc<Mutex<CrmState>>, entity: &'static str) -> Box<dy
     })
 }
 
-pub fn delete_route(state: Arc<Mutex<CrmState>>, entity: &'static str) -> Box<dyn Fn(&Request) -> Response + Send + Sync> {
+pub fn delete_route(
+    state: Arc<Mutex<CrmState>>,
+    entity: &'static str,
+) -> Box<dyn Fn(&Request) -> Response + Send + Sync> {
     Box::new(move |req: &Request| {
         let id = match extract_id(&req.path) {
             Some(id) => id,

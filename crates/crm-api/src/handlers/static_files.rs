@@ -2,7 +2,9 @@ use crate::router_setup::{internal_error, not_found, CrmState};
 use akurai_http::{Request, Response};
 use std::sync::{Arc, Mutex};
 
-pub fn static_file_route(state: Arc<Mutex<CrmState>>) -> Box<dyn Fn(&Request) -> Response + Send + Sync> {
+pub fn static_file_route(
+    state: Arc<Mutex<CrmState>>,
+) -> Box<dyn Fn(&Request) -> Response + Send + Sync> {
     Box::new(move |req: &Request| {
         let path = &req.path;
         let state = match state.lock() {
@@ -19,8 +21,11 @@ pub fn static_file_route(state: Arc<Mutex<CrmState>>) -> Box<dyn Fn(&Request) ->
         };
 
         let canonical = std::fs::canonicalize(&file_path).ok();
-        let frontend_canonical = std::fs::canonicalize(frontend).unwrap_or_else(|_| std::path::PathBuf::from("/nonexistent"));
-        let is_safe = canonical.as_ref().is_some_and(|c| c.starts_with(&frontend_canonical));
+        let frontend_canonical = std::fs::canonicalize(frontend)
+            .unwrap_or_else(|_| std::path::PathBuf::from("/nonexistent"));
+        let is_safe = canonical
+            .as_ref()
+            .is_some_and(|c| c.starts_with(&frontend_canonical));
 
         if !is_safe {
             return not_found("invalid path");

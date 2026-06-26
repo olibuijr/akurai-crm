@@ -5,8 +5,14 @@ fn test_person_roundtrip() {
     let person = Person {
         id: 1,
         name: FullName::new("Anna", "Jónsdóttir"),
-        email: Some(Email { address: "anna@test.is".into(), label: "work".into() }),
-        phone: Some(Phone { number: "+354 123 4567".into(), label: "mobile".into() }),
+        email: Some(Email {
+            address: "anna@test.is".into(),
+            label: "work".into(),
+        }),
+        phone: Some(Phone {
+            number: "+354 123 4567".into(),
+            label: "mobile".into(),
+        }),
         job_title: Some("CEO".into()),
         company_id: Some(1),
         linkedin_url: None,
@@ -26,9 +32,10 @@ fn test_person_roundtrip() {
 
 #[test]
 fn test_company_validation() {
-    let result = Company::from_json(1, &akurai_json::Value::Object(vec![
-        ("name".into(), akurai_json::Value::Str("".into())),
-    ]));
+    let result = Company::from_json(
+        1,
+        &akurai_json::Value::Object(vec![("name".into(), akurai_json::Value::Str("".into()))]),
+    );
     assert!(result.is_err());
 }
 
