@@ -52,6 +52,18 @@ pub fn r(
     }
 }
 
+fn health_route() -> Box<dyn Fn(&Request) -> Response + Send + Sync> {
+    Box::new(|_req: &Request| {
+        json_response(akurai_json::Value::Object(vec![
+            ("app".into(), akurai_json::Value::Str("akurai-crm".into())),
+            ("framework".into(), akurai_json::Value::Str("AkurAI-Framework".into())),
+            ("framework_version".into(), akurai_json::Value::Str("0.8.2".into())),
+            ("version".into(), akurai_json::Value::Str(env!("CARGO_PKG_VERSION").into())),
+            ("status".into(), akurai_json::Value::Str("ok".into())),
+        ]))
+    })
+}
+
 /// Build the route table for the CRM API
 pub fn build_router(state: Arc<Mutex<CrmState>>) -> Vec<Route> {
     vec![
@@ -70,6 +82,7 @@ pub fn build_router(state: Arc<Mutex<CrmState>>) -> Vec<Route> {
             auth::logout_route(Arc::clone(&state)),
         ),
         r("GET", "/api/me", auth::me_route(Arc::clone(&state))),
+        r("GET", "/api/health", health_route()),
         r("GET", "/*", handlers::static_file_route(Arc::clone(&state))),
         r(
             "GET",

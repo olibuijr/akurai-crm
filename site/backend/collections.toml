@@ -2,50 +2,171 @@
 # Auto-generates REST API for all collections
 
 [collections.people]
-fields = [
-    { name = "firstName", type = "Text", label = "First Name", required = true, searchable = true },
-    { name = "lastName", type = "Text", label = "Last Name", required = true, searchable = true },
-    { name = "email", type = "Text", label = "Email", searchable = true },
-    { name = "phone", type = "Text", label = "Phone" },
-    { name = "jobTitle", type = "Text", label = "Job Title", searchable = true },
-    { name = "companyId", type = "Number", label = "Company" },
-    { name = "linkedinUrl", type = "Text", label = "LinkedIn URL" },
-    { name = "avatarUrl", type = "Text", label = "Avatar" },
-]
+[[collections.people.fields]]
+name = "firstName"
+type = "Text"
+label = "First Name"
+required = true
+searchable = true
+
+[[collections.people.fields]]
+name = "lastName"
+type = "Text"
+label = "Last Name"
+required = true
+searchable = true
+
+[[collections.people.fields]]
+name = "email"
+type = "Text"
+label = "Email"
+searchable = true
+
+[[collections.people.fields]]
+name = "phone"
+type = "Text"
+label = "Phone"
+
+[[collections.people.fields]]
+name = "jobTitle"
+type = "Text"
+label = "Job Title"
+searchable = true
+
+[[collections.people.fields]]
+name = "companyId"
+type = "Number"
+label = "Company"
+
+[[collections.people.fields]]
+name = "linkedinUrl"
+type = "Text"
+label = "LinkedIn URL"
+
+[[collections.people.fields]]
+name = "avatarUrl"
+type = "Text"
+label = "Avatar"
+
 
 [collections.companies]
-fields = [
-    { name = "name", type = "Text", label = "Name", required = true, searchable = true },
-    { name = "domainName", type = "Text", label = "Domain", searchable = true },
-    { name = "annualRevenue", type = "Number", label = "Annual Revenue" },
-    { name = "employeeCount", type = "Number", label = "Employees" },
-    { name = "linkedinUrl", type = "Text", label = "LinkedIn" },
-    { name = "websiteUrl", type = "Text", label = "Website" },
-    { name = "address", type = "Text", label = "Address" },
-]
+[[collections.companies.fields]]
+name = "name"
+type = "Text"
+label = "Name"
+required = true
+searchable = true
+
+[[collections.companies.fields]]
+name = "domainName"
+type = "Text"
+label = "Domain"
+searchable = true
+
+[[collections.companies.fields]]
+name = "annualRevenue"
+type = "Number"
+label = "Annual Revenue"
+
+[[collections.companies.fields]]
+name = "employeeCount"
+type = "Number"
+label = "Employees"
+
+[[collections.companies.fields]]
+name = "linkedinUrl"
+type = "Text"
+label = "LinkedIn"
+
+[[collections.companies.fields]]
+name = "websiteUrl"
+type = "Text"
+label = "Website"
+
+[[collections.companies.fields]]
+name = "address"
+type = "Text"
+label = "Address"
+
 
 [collections.opportunities]
-fields = [
-    { name = "name", type = "Text", label = "Deal Name", required = true, searchable = true },
-    { name = "amount", type = "Number", label = "Amount" },
-    { name = "stage", type = "Select", label = "Stage", options = ["new", "screening", "meeting", "proposal", "negotiation", "won", "lost"] },
-    { name = "closeDate", type = "Number", label = "Close Date" },
-    { name = "probability", type = "Number", label = "Probability (%)" },
-    { name = "personId", type = "Number", label = "Contact" },
-    { name = "companyId", type = "Number", label = "Company" },
-]
+[[collections.opportunities.fields]]
+name = "name"
+type = "Text"
+label = "Deal Name"
+required = true
+searchable = true
+
+[[collections.opportunities.fields]]
+name = "amount"
+type = "Number"
+label = "Amount"
+
+[[collections.opportunities.fields]]
+name = "stage"
+type = "Select"
+label = "Stage"
+
+[[collections.opportunities.fields]]
+name = "closeDate"
+type = "Number"
+label = "Close Date"
+
+[[collections.opportunities.fields]]
+name = "probability"
+type = "Number"
+label = "Probability (%)"
+
+[[collections.opportunities.fields]]
+name = "personId"
+type = "Number"
+label = "Contact"
+
+[[collections.opportunities.fields]]
+name = "companyId"
+type = "Number"
+label = "Company"
+
 
 [collections.tasks]
-fields = [
-    { name = "title", type = "Text", label = "Title", required = true, searchable = true },
-    { name = "description", type = "Text", label = "Description" },
-    { name = "status", type = "Select", label = "Status", options = ["todo", "in_progress", "done", "cancelled"] },
-    { name = "dueAt", type = "Number", label = "Due Date" },
-    { name = "assigneeId", type = "Number", label = "Assignee" },
-]
+[[collections.tasks.fields]]
+name = "title"
+type = "Text"
+label = "Title"
+required = true
+searchable = true
+
+[[collections.tasks.fields]]
+name = "description"
+type = "Text"
+label = "Description"
+
+[[collections.tasks.fields]]
+name = "status"
+type = "Select"
+label = "Status"
+
+[[collections.tasks.fields]]
+name = "dueAt"
+type = "Number"
+label = "Due Date"
+
+[[collections.tasks.fields]]
+name = "assigneeId"
+type = "Number"
+label = "Assignee"
+
 
 [collections.notes]
-fields = [
-    { name = "title", type = "Text", label = "Title", searchable = true },
-    { name = "body", type = "Text", label = "Body", required = true },
-]
+[[collections.notes.fields]]
+name = "title"
+type = "Text"
+label = "Title"
+searchable = true
+
+[[collections.notes.fields]]
+name = "body"
+type = "Text"
+label = "Body"
+required = true
+
