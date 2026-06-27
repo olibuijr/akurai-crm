@@ -222,7 +222,10 @@ impl ToolRegistry {
                         "serverInfo".into(),
                         Value::Object(vec![
                             ("name".into(), Value::Str("akurai-crm-mcp".into())),
-                            ("version".into(), Value::Str("0.1.0".into())),
+                            (
+                                "version".into(),
+                                Value::Str(env!("CARGO_PKG_VERSION").into()),
+                            ),
                         ]),
                     ),
                 ]),

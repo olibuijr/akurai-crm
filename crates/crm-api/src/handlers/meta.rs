@@ -60,7 +60,10 @@ pub fn meta_route(state: Arc<Mutex<CrmState>>) -> Box<dyn Fn(&Request) -> Respon
             .collect();
 
         json_response(Value::Object(vec![
-            ("version".into(), Value::Str("0.1.0".into())),
+            (
+                "version".into(),
+                Value::Str(env!("CARGO_PKG_VERSION").into()),
+            ),
             ("objects".into(), Value::Array(objects)),
         ]))
     })
